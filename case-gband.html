@@ -17,6 +17,9 @@
   --max:1200px;--wide:1320px;--pad:40px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
+/* 交互元素禁止选中/拖拽复制 */
+button,.nav-cta,.nl,.pill,.filter-tag,.tl-tag,.av,.work-view,.work-view span,.proj-view-hint,.proj-view-hint span,.sec-more,.photo-hd-r,.cm-card,.cm-action,.cf-back,.back-link,.mm-link,.nav-burger,.track-arrow,.web-scroll-hint,.ai-flip-hint,.flow-step,.next-inner,.hero-scroll-hint,.logo-icon,.nav-logo,.proj-link,.contact-badge,.cb-dot,.view-img{user-select:none;-webkit-user-select:none;-webkit-user-drag:none;}
+
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans SC',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none;}
 a{text-decoration:none;color:inherit;}
@@ -194,7 +197,7 @@ footer{background:var(--dark);}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mobile-menu{position:fixed;top:74px;left:24px;right:24px;z-index:499;background:rgba(255,255,255,.97);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(0,0,0,.06);box-shadow:0 16px 48px rgba(0,0,0,.14);border-radius:22px;padding:10px;flex-direction:column;gap:2px;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1);display:none;}
+.mobile-menu{position:fixed;top:88px;left:24px;right:24px;z-index:499;background:rgba(255,255,255,.97);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(0,0,0,.06);box-shadow:0 16px 48px rgba(0,0,0,.14);border-radius:22px;padding:10px;flex-direction:column;gap:2px;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1);display:none;}
 .mobile-menu.open{opacity:1;transform:translateY(0);pointer-events:all;}
 .mm-link{display:block;padding:14px 20px;border-radius:14px;font-size:16px;color:var(--ink);font-family:'Noto Sans SC',sans-serif;transition:background .2s;}
 .mm-link:hover,.mm-link:active{background:rgba(0,0,0,.05);}
@@ -216,6 +219,7 @@ footer{background:var(--dark);}
   .hero-meta{flex-direction:column;align-items:flex-start;}
   .next-inner{flex-direction:column;align-items:flex-start;}
   .foot-cta-bottom{grid-template-columns:1fr;gap:24px;}
+  .foot-cta-bottom>div{justify-self:start;text-align:left;}
 }
 
 /* ══ G Band：功能矩阵（Framer大卡网格）══ */
@@ -262,9 +266,9 @@ footer{background:var(--dark);}
 .fb-title{font-family:'Noto Sans SC',sans-serif;font-size:clamp(28px,3.4vw,44px);font-weight:500;color:var(--ink);letter-spacing:-.03em;margin-bottom:18px;line-height:1.1;}
 .fb-desc{font-family:'Noto Sans SC',sans-serif;font-size:16px;font-weight:300;color:var(--ink2);line-height:1.8;max-width:440px;}
 .fb-desc b{font-weight:500;color:var(--ink);}
-.fb-img{border-radius:24px;overflow:hidden;background:var(--bg);border:1px solid var(--line-soft);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink3);font-size:13px;font-family:'Noto Sans SC',sans-serif;position:relative;transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s;}
+.fb-img{width:100%;border-radius:24px;overflow:hidden;background:var(--bg-soft);border:1px solid var(--line-soft);aspect-ratio:740/1600;max-width:300px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink3);font-size:13px;font-family:'Noto Sans SC',sans-serif;position:relative;transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s;}
 .feat-block:hover .fb-img{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.08);}
-.fb-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:18px;}
+.fb-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .fb-img .ic{font-size:44px;opacity:.18;}
 
 /* ══ G Band：优化 并排 ══ */
@@ -273,8 +277,8 @@ footer{background:var(--dark);}
 .opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:64px;}
 .opt-block{border-radius:24px;background:var(--bg-soft);border:1px solid var(--line-soft);padding:40px;cursor:pointer;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s,background .4s;}
 .opt-block:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,.08);background:var(--bg);}
-.opt-icon-lg{font-size:40px;margin-bottom:24px;display:block;transition:transform .5s cubic-bezier(.34,1.56,.64,1);}
-.opt-block:hover .opt-icon-lg{transform:scale(1.12);}
+.opt-icon-lg{font-size:40px;margin-bottom:24px;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1);transform-origin:center;}
+.opt-block:hover .opt-icon-lg{transform:translateY(-6px);}
 .opt-tag2{font-size:11px;background:var(--bg-mid);color:var(--ink2);padding:4px 12px;border-radius:100px;font-family:'Noto Sans SC',sans-serif;display:inline-block;margin-bottom:14px;}
 .opt-name2{font-family:'Noto Sans SC',sans-serif;font-size:24px;font-weight:500;color:var(--ink);margin-bottom:12px;letter-spacing:-.02em;}
 .opt-desc2{font-family:'Noto Sans SC',sans-serif;font-size:15px;font-weight:300;color:var(--ink2);line-height:1.8;}
@@ -341,7 +345,7 @@ footer{background:var(--dark);}
   <h1 class="hero-h" id="heroH"><span class="hero-h-inner">G Band 智能健康 APP</span></h1>
   <p class="hero-sub">一款智能手表健康 App 的<b>五大功能设计</b>。有的从 0 到 1 定义，有的在迭代中优化。</p>
   <div class="hero-overview">
-    <div class="ov-item"><div class="ov-k">My Role</div><div class="ov-v">交互 · UI<span>全部功能设计</span></div></div>
+    <div class="ov-item"><div class="ov-k">My Role</div><div class="ov-v">交互 · UI<span>功能设计与迭代优化</span></div></div>
     <div class="ov-item"><div class="ov-k">Timeline</div><div class="ov-v">2024 — 至今<span>启瑞医疗</span></div></div>
     <div class="ov-item"><div class="ov-k">Platform</div><div class="ov-v">智能手表 · App<span>穿戴健康设备</span></div></div>
     <div class="ov-item"><div class="ov-k">Scope</div><div class="ov-v">5 大功能<span>三类健康场景</span></div></div>
@@ -359,7 +363,7 @@ footer{background:var(--dark);}
 <div class="statement">
   <p class="sec-num r">01 — Background</p>
   <h2 class="sec-h r">背景</h2>
-  <h3 class="stmt-big r">一款戴在手腕上的健康助手。与袜子项目不同——<span class="dim">这是面向成年用户的智能手表</span>，由我负责全部功能设计。</h3>
+  <h3 class="stmt-big r">一款戴在手腕上的健康助手。与袜子项目不同——<span class="dim">这是面向成年用户的智能手表，我参与了部分功能的设计，以及既有功能的迭代优化。</span></h3>
 </div>
 
 <!-- 02 功能总览 -->
@@ -407,7 +411,6 @@ footer{background:var(--dark);}
 
     <div class="feat-block r">
       <div class="fb-text">
-        <div class="fb-no">01</div>
         <div class="fb-meta"><span class="fb-tag new">中风预防</span><span class="fb-tag dev">设计完成 · 待开发</span></div>
         <h3 class="fb-title">把风险，讲得让人愿意听</h3>
         <p class="fb-desc">面向高风险人群的预警。核心是<b>如何表达「风险」</b>——既让用户重视，又不制造恐慌。通过风险分级与可行动的建议，把医疗预警变成能理解、能应对的健康指引。</p>
@@ -417,7 +420,6 @@ footer{background:var(--dark);}
 
     <div class="feat-block flip r">
       <div class="fb-text">
-        <div class="fb-no">02</div>
         <div class="fb-meta"><span class="fb-tag new">微体检</span><span class="fb-tag done">已开发</span></div>
         <h3 class="fb-title">手腕上的一次快速自查</h3>
         <p class="fb-desc">用手表快速完成一次健康自查。设计重点是<b>流程的轻量化</b>——拆解成简单、有引导的几步，让用户在手腕上就能轻松完成，结果一眼看懂。</p>
@@ -436,7 +438,6 @@ footer{background:var(--dark);}
 
     <div class="feat-block r" style="border-top:none;padding-top:24px;">
       <div class="fb-text">
-        <div class="fb-no">03</div>
         <div class="fb-meta"><span class="fb-tag new">AI 报告</span><span class="fb-tag done">已开发</span></div>
         <h3 class="fb-title">先给结论，再讲细节</h3>
         <p class="fb-desc">把零散数据通过 AI 整合成<b>可读、可信的报告</b>。关键是信息层级——先给结论，再展开细节，让用户得到「我的健康怎么样、该做什么」的清晰回答，而不是面对一堆原始数据。</p>
@@ -541,7 +542,7 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
 
 // nav 滚动
 let lastY=0;const navEl=document.getElementById('nav');
-window.addEventListener('scroll',()=>{const y=window.scrollY;if(y>120&&y>lastY)navEl.classList.add('collapsed');else if(y<lastY||y<120)navEl.classList.remove('collapsed');lastY=y;},{passive:true});
+window.addEventListener('scroll',()=>{if(window.innerWidth<=900){navEl.classList.remove('collapsed');lastY=window.scrollY;return;}const y=window.scrollY;if(y>120&&y>lastY)navEl.classList.add('collapsed');else if(y<lastY||y<120)navEl.classList.remove('collapsed');lastY=y;},{passive:true});
 
 /* 移动端汉堡菜单 */
 const navBurger=document.getElementById('navBurger');
