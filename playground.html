@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>练习 — 周晓豆</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
@@ -51,7 +51,7 @@ nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9
 .ph-badge-row{display:flex;align-items:center;gap:12px;padding-top:180px;padding-bottom:56px;}
 .av{font-size:12px;color:var(--ink);border:1px solid var(--ink);padding:5px 14px;border-radius:100px;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;letter-spacing:.08em;}
 .ph-title-row{padding-bottom:40px;}
-.ph-title{font-family:'Noto Sans SC',sans-serif;font-weight:500;font-size:clamp(44px,7vw,104px);line-height:1.12;letter-spacing:-.04em;color:var(--ink);overflow:hidden;margin-left:-.06em;}
+.ph-title{font-family:'Noto Sans SC',sans-serif;font-weight:500;font-size:clamp(44px,7vw,104px);line-height:1.12;letter-spacing:-.04em;color:var(--ink);overflow:hidden;}
 .ph-title-inner{display:inline-block;transform:translateY(110%);animation:slideUp 1s cubic-bezier(.16,1,.3,1) forwards .15s;padding-bottom:.04em;}
 .ph-sub{font-family:'Noto Sans SC',sans-serif;font-size:clamp(15px,1.6vw,19px);font-weight:300;color:var(--ink2);line-height:1.7;max-width:520px;margin-top:24px;opacity:0;animation:fadeIn .9s ease forwards .5s;}
 
@@ -155,7 +155,7 @@ nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9
 
 /* ══ FOOT CTA ══ */
 .foot-cta{background:var(--dark);border-top:1px solid rgba(255,255,255,.09);}
-.foot-cta-inner{max-width:var(--max);margin:0 auto;padding:100px var(--pad) 80px;}
+.foot-cta-inner{max-width:var(--max);margin:0 auto;padding:100px var(--pad) 56px;}
 .foot-cta-top{margin-bottom:56px;}
 .foot-cta-en{font-size:clamp(15px,1.8vw,22px);color:rgba(255,255,255,.4);letter-spacing:.04em;font-family:'Inter',sans-serif;display:block;margin-bottom:20px;font-weight:300;}
 .foot-cta-h{font-family:'Noto Sans SC',sans-serif;font-size:clamp(32px,5vw,68px);font-weight:500;line-height:1.05;letter-spacing:-.04em;color:#fff;}
@@ -193,7 +193,8 @@ footer{background:var(--dark);}
   :root{--pad:24px;}
   .nav-links{display:none;}
   .nav-right{display:none;}
-  .nav-burger{display:flex;}
+  .nav-burger{display:flex;margin-left:auto;}
+  nav{display:flex !important;justify-content:space-between;align-items:center;}
   .mobile-menu{display:flex;}
   nav{padding:8px 8px 8px 14px;}
   nav.collapsed{width:min(calc(100% - 56px),var(--max));}
@@ -202,8 +203,13 @@ footer{background:var(--dark);}
   .phone.p4,.phone.p5{display:block;}
   .ai-grid{grid-template-columns:1fr 1fr;}
   .track-item{width:78vw;max-width:420px;}
+  .track-viewport{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;cursor:default;}
+  .track-viewport::-webkit-scrollbar{display:none;}
+  .track-viewport{scrollbar-width:none;}
+  .track-scroll{transform:none !important;transition:none;}
+  .track-item{scroll-snap-align:start;}
   .foot-cta-bottom{grid-template-columns:1fr;gap:24px;}
-  .foot-cta-bottom>div{justify-self:start;text-align:left;}
+  .foot-cta-bottom>div:nth-child(2),.foot-cta-bottom>div:nth-child(3){justify-self:start;text-align:left;}
 }
 </style>
 </head>
@@ -257,11 +263,11 @@ footer{background:var(--dark);}
       <span class="pg-count">01</span>
     </div>
     <div class="phone-stage r">
-      <div class="phone p1"><div class="ph-img"><img src="images/play-mini-1.jpg" alt="小程序界面"></div></div>
-      <div class="phone p2"><div class="ph-img"><img src="images/play-mini-2.jpg" alt="小程序界面"></div></div>
-      <div class="phone p3"><div class="ph-img"><img src="images/play-mini-3.jpg" alt="小程序界面"></div></div>
-      <div class="phone p4"><div class="ph-img"><img src="images/play-mini-4.jpg" alt="小程序界面"></div></div>
-      <div class="phone p5"><div class="ph-img"><img src="images/play-mini-5.jpg" alt="小程序界面"></div></div>
+      <div class="phone p1"><div class="ph-img"><img src="images/play-mini-1.png" alt="小程序界面"></div></div>
+      <div class="phone p2"><div class="ph-img"><img src="images/play-mini-2.png" alt="小程序界面"></div></div>
+      <div class="phone p3"><div class="ph-img"><img src="images/play-mini-3.png" alt="小程序界面"></div></div>
+      <div class="phone p4"><div class="ph-img"><img src="images/play-mini-4.png" alt="小程序界面"></div></div>
+      <div class="phone p5"><div class="ph-img"><img src="images/play-mini-5.png" alt="小程序界面"></div></div>
     </div>
   </div>
 </div>
@@ -279,7 +285,7 @@ footer{background:var(--dark);}
     <div class="web-grid">
       <div class="web-card r">
         <div class="ph-img">
-          <img src="images/play-web1.jpg" alt="网页设计练习 01">
+          <img src="images/play-web1.png" alt="网页设计练习 01">
           <span class="web-scroll-hint">悬停自动滚动浏览 ↓</span>
         </div>
         <div class="web-meta">
@@ -289,7 +295,7 @@ footer{background:var(--dark);}
       </div>
       <div class="web-card r">
         <div class="ph-img">
-          <img src="images/play-web2.jpg" alt="网页设计练习 02">
+          <img src="images/play-web2.png" alt="网页设计练习 02">
           <span class="web-scroll-hint">悬停自动滚动浏览 ↓</span>
         </div>
         <div class="web-meta">
@@ -436,6 +442,11 @@ window.addEventListener('scroll',()=>{if(window.innerWidth<=900){navEl.classList
   const vp=document.getElementById('trackViewport');
   const track=document.getElementById('trackScroll');
   if(!vp||!track)return;
+  // 移动端用原生滚动，跳过 JS 拖拽
+  if(window.matchMedia('(max-width:900px)').matches){
+    window.trackMove=function(dir){vp.scrollBy({left:dir*300,behavior:'smooth'});};
+    return;
+  }
   let pos=0, maxScroll=0, isDown=false, startX=0, startPos=0, moved=false;
 
   function calcMax(){

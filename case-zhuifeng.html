@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>隹风 AI 养成小程序 — 周晓豆</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
@@ -24,7 +24,7 @@ html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans SC',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none;}
 a{text-decoration:none;color:inherit;}
 ::selection{background:var(--ink);color:var(--bg);}
-@media(max-width:900px){body{cursor:auto;}#cursor-ring{display:none;}}
+@media(max-width:900px){body{cursor:auto;}#cursor-ring{display:none;}#cursor-label{display:none;}}
 
 #cursor-ring{position:fixed;z-index:9998;pointer-events:none;left:0;top:0;width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(10,10,10,.3);margin:-11px 0 0 -11px;transition:width .25s cubic-bezier(.16,1,.3,1),height .25s cubic-bezier(.16,1,.3,1),margin .25s,border-color .25s,background .25s;will-change:transform;}
 .cursor-hover #cursor-ring{width:54px;height:54px;margin:-27px 0 0 -27px;border-color:rgba(10,10,10,.5);background:rgba(10,10,10,.03);}
@@ -166,7 +166,7 @@ nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9
 
 /* ══ CTA 黑（与首页统一）══ */
 .foot-cta{background:var(--dark);border-top:1px solid rgba(255,255,255,.09);}
-.foot-cta-inner{max-width:var(--wide);margin:0 auto;padding:100px var(--pad) 80px;}
+.foot-cta-inner{max-width:var(--wide);margin:0 auto;padding:100px var(--pad) 56px;}
 .foot-cta-top{margin-bottom:56px;}
 .foot-cta-en{font-size:clamp(14px,1.5vw,18px);color:rgba(255,255,255,.4);letter-spacing:.08em;font-family:'Inter',sans-serif;text-transform:uppercase;display:block;margin-bottom:20px;font-weight:400;}
 .foot-cta-h{font-family:'Noto Sans SC',sans-serif;font-size:clamp(32px,5vw,68px);font-weight:500;line-height:1.05;letter-spacing:-.04em;color:#fff;}
@@ -208,7 +208,8 @@ footer{background:var(--dark);}
   :root{--pad:24px;}
   .nav-links{display:none;}
   .nav-right{display:none;}
-  .nav-burger{display:flex;}
+  .nav-burger{display:flex;margin-left:auto;}
+  nav{display:flex !important;justify-content:space-between;align-items:center;}
   .mobile-menu{display:flex;}
   nav{padding:8px 8px 8px 14px;}
   nav.collapsed{width:min(calc(100% - 56px),var(--wide));}
@@ -219,7 +220,7 @@ footer{background:var(--dark);}
   .hero-meta{flex-direction:column;align-items:flex-start;}
   .next-inner{flex-direction:column;align-items:flex-start;}
   .foot-cta-bottom{grid-template-columns:1fr;gap:24px;}
-  .foot-cta-bottom>div{justify-self:start;text-align:left;}
+  .foot-cta-bottom>div:nth-child(2),.foot-cta-bottom>div:nth-child(3){justify-self:start;text-align:left;}
 }
 
 /* ══ 隹风：养成循环 ══ */
