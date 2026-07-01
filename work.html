@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>工作 — 周晓豆</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+:root{
+  --bg:#FFFFFF;--bg-soft:#F7F7F5;--bg-mid:#EFEFEC;
+  --ink:#0A0A0A;--ink2:#454545;--ink3:#8A8A8A;
+  --line-soft:#E8E8E8;--paper:#F2F2EF;
+  --dark:#0A0A0A;--dark3:#222222;
+  --ai:#5B53C4;--ai-l:#EEEDFE;
+  --health:#1D7D5B;--health-l:#E6F4EE;
+  --hw:#B6791F;--hw-l:#FaF1DF;
+  --max:1320px;--pad:40px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans SC',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none;}
+a{text-decoration:none;color:inherit;}
+::selection{background:var(--ink);color:var(--bg);}
+@media(max-width:900px){body{cursor:auto;}#cursor-ring{display:none;}}
+
+/* 光标 */
+#cursor-ring{position:fixed;z-index:9998;pointer-events:none;left:0;top:0;width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(10,10,10,.3);margin:-11px 0 0 -11px;transition:width .25s cubic-bezier(.16,1,.3,1),height .25s cubic-bezier(.16,1,.3,1),margin .25s,border-color .25s,background .25s;will-change:transform;}
+.cursor-hover #cursor-ring{width:40px;height:40px;margin:-20px 0 0 -20px;border-color:rgba(10,10,10,.5);background:rgba(10,10,10,.03);}
+.cursor-dark #cursor-ring{border-color:rgba(255,255,255,.6);}
+.cursor-dark.cursor-hover #cursor-ring{border-color:rgba(255,255,255,.8);background:rgba(255,255,255,.05);}
+
+/* ══ NAV ══ */
+.nav-outer{position:fixed;top:18px;left:0;right:0;z-index:500;display:flex;justify-content:center;pointer-events:none;}
+nav{pointer-events:all;display:grid;grid-template-columns:minmax(140px,1fr) auto minmax(140px,1fr);align-items:center;background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.9);box-shadow:0 4px 32px rgba(0,0,0,.07),0 0 0 .5px rgba(0,0,0,.04);border-radius:100px;padding:9px 12px 9px 18px;width:min(calc(100% - 56px),var(--max));transition:width .55s cubic-bezier(.16,1,.3,1),background .45s ease,box-shadow .45s ease;}
+nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9);box-shadow:0 10px 48px rgba(0,0,0,.13);}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;transition:opacity .2s;}
+.nav-logo:hover{opacity:.5;}
+.logo-icon{width:34px;height:34px;border-radius:10px;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;font-family:'Noto Sans SC',sans-serif;flex-shrink:0;}
+.logo-name{font-size:16px;font-weight:600;color:var(--ink);font-family:'Noto Sans SC',sans-serif;letter-spacing:-.02em;white-space:nowrap;}
+.nav-links{display:flex;align-items:center;justify-content:center;gap:4px;}
+.nl{font-size:15px;color:var(--ink3);cursor:pointer;padding:8px 18px;border-radius:100px;transition:color .2s,background .2s;font-family:'Noto Sans SC',sans-serif;white-space:nowrap;position:relative;}
+.nl:hover{color:var(--ink);background:rgba(0,0,0,.045);}
+.nl.on{color:var(--ink);font-weight:500;}
+.nl.on::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--ink);}
+.nav-right{display:flex;justify-content:flex-end;}
+.nav-cta{font-size:14px;font-weight:600;color:#fff;background:var(--ink);padding:10px 24px;border-radius:100px;cursor:pointer;transition:opacity .2s,transform .25s cubic-bezier(.34,1.56,.64,1);font-family:'Noto Sans SC',sans-serif;white-space:nowrap;}
+.nav-cta:hover{opacity:.74;transform:scale(.97);}
+
+/* ══ 页面头部 — 与首页统一，去线条 ══ */
+.work-head{max-width:var(--max);margin:0 auto;padding:0 var(--pad);}
+.wh-badge-row{display:flex;align-items:center;gap:12px;padding-top:180px;padding-bottom:56px;}
+.av{font-size:12px;color:var(--ink);border:1px solid var(--ink);padding:5px 14px;border-radius:100px;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;letter-spacing:.08em;}
+.wh-title-row{padding-bottom:40px;}
+.wh-title{font-family:'Noto Sans SC',sans-serif;font-weight:500;font-size:clamp(44px,7vw,104px);line-height:1.12;letter-spacing:-.04em;color:var(--ink);overflow:hidden;padding:0 .06em;}
+.wh-title-inner{display:inline-block;transform:translateY(110%);animation:slideUp 1s cubic-bezier(.16,1,.3,1) forwards .15s;padding-bottom:.04em;}
+.wh-sub{font-family:'Noto Sans SC',sans-serif;font-size:clamp(15px,1.6vw,19px);font-weight:300;color:var(--ink2);line-height:1.7;max-width:520px;margin-top:24px;opacity:0;animation:fadeIn .9s ease forwards .5s;}
+
+/* 筛选 */
+.wh-filter{display:flex;gap:8px;flex-wrap:wrap;padding:0 0 0;opacity:0;animation:fadeIn .9s ease forwards .65s;}
+.filter-tag{font-size:13px;color:var(--ink2);border:1px solid var(--line-soft);background:var(--bg);padding:8px 18px;border-radius:100px;cursor:pointer;transition:all .25s;font-family:'Noto Sans SC',sans-serif;}
+.filter-tag:hover{border-color:var(--ink3);}
+.filter-tag.on{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+/* ══ 作品列表 — 交错布局 + 单张大图 ══ */
+.work-list-section{background:var(--bg-soft);border-top:1px solid var(--line-soft);margin-top:40px;}
+.work-list{max-width:var(--max);margin:0 auto;padding:80px var(--pad) 100px;}
+.proj-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:center;
+  padding:72px 0;
+  position:relative;
+}
+/* 偶数项左右交换，形成交错 */
+.proj-row.flip .proj-left{order:2;}
+.proj-row.flip .proj-visual{order:1;}
+
+.proj-left{position:relative;}
+
+.proj-content{position:relative;z-index:1;}
+
+
+
+
+.proj-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;}
+.wl-tag{font-size:11px;padding:4px 12px;border-radius:100px;font-family:'Noto Sans SC',sans-serif;border:1px solid var(--line-soft);color:var(--ink3);}
+.wl-tag.ai{background:var(--ai-l);color:var(--ai);border-color:transparent;}
+.wl-tag.health{background:var(--health-l);color:var(--health);border-color:transparent;}
+.wl-tag.hw{background:var(--hw-l);color:var(--hw);border-color:transparent;}
+.proj-name{font-family:'Noto Sans SC',sans-serif;font-size:clamp(30px,3.4vw,46px);font-weight:500;letter-spacing:-.035em;line-height:1.08;color:var(--ink);margin-bottom:18px;}
+.proj-desc{font-size:15px;color:var(--ink2);font-family:'Noto Sans SC',sans-serif;font-weight:300;line-height:1.8;margin-bottom:32px;max-width:420px;}
+.proj-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;color:var(--ink);
+  font-family:'Noto Sans SC',sans-serif;cursor:pointer;
+  border-bottom:1px solid var(--line-soft);
+  padding-bottom:3px;
+  transition:gap .3s,border-color .3s;
+}
+.proj-link:hover{gap:12px;border-color:var(--ink);}
+.pl-arr{display:inline-block;transition:transform .3s;}
+.proj-link:hover .pl-arr{transform:translateX(3px);}
+
+/* 右侧单张大图 — 带趣味交互 */
+.proj-visual{position:relative;}
+.proj-img-wrap{
+  cursor:pointer;
+  width:100%;aspect-ratio:4/3;
+  border-radius:24px;overflow:hidden;
+  background:var(--bg);
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s;
+  box-shadow:0 8px 40px rgba(0,0,0,.04);
+}
+.proj-img-wrap:hover{
+  transform:translateY(-8px);
+  box-shadow:0 32px 80px rgba(0,0,0,.1);
+}
+.proj-img-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1);}
+.proj-img-wrap:hover img{transform:scale(1.05);}
+.proj-img-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink3);font-size:13px;font-family:'Noto Sans SC',sans-serif;}
+.proj-img-ph .ic{font-size:36px;opacity:.16;}
+
+
+
+
+
+
+/* hover 时图上浮现"查看"提示 */
+.proj-view-hint{
+  position:absolute;inset:0;
+  background:rgba(10,10,10,0);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .5s;z-index:1;
+}
+.proj-view-hint span{
+  color:#fff;font-size:14px;letter-spacing:.04em;
+  font-family:'Noto Sans SC',sans-serif;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .4s,transform .4s;
+  border:1px solid rgba(255,255,255,.6);
+  padding:11px 26px;border-radius:100px;
+  backdrop-filter:blur(4px);
+}
+.proj-img-wrap:hover .proj-view-hint{background:rgba(10,10,10,.15);}
+.proj-img-wrap:hover .proj-view-hint span{opacity:1;transform:translateY(0);}
+
+
+
+/* ══ 详情页区块（折叠展示，点击列表项后滚动到对应锚点 — 此处作为同页演示） ══ */
+.detail-section{background:var(--bg);}
+.detail-inner{max-width:var(--max);margin:0 auto;padding:90px var(--pad);}
+.detail-banner{text-align:center;padding:40px 0 56px;}
+.detail-banner .db-eyebrow{font-size:12px;color:var(--ink3);letter-spacing:.14em;text-transform:uppercase;font-family:'Inter',sans-serif;margin-bottom:16px;}
+.detail-banner .db-title{font-family:'Noto Sans SC',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:500;letter-spacing:-.03em;color:var(--ink);line-height:1.2;}
+.detail-banner .db-note{font-size:14px;color:var(--ink3);font-family:'Noto Sans SC',sans-serif;margin-top:14px;}
+
+/* 8节结构示意 */
+.story-flow{display:flex;align-items:flex-start;flex-wrap:wrap;margin-top:48px;}
+.flow-step{display:flex;flex-direction:column;align-items:center;text-align:center;width:150px;}
+.flow-dot{width:40px;height:40px;border-radius:50%;background:var(--bg-soft);border:1px solid var(--line-soft);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--ink3);font-family:'Inter',sans-serif;margin-bottom:14px;transition:background .3s,color .3s,border-color .3s;}
+.flow-step:hover .flow-dot{background:var(--ink);color:#fff;border-color:var(--ink);}
+.flow-name{font-family:'Noto Sans SC',sans-serif;font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px;}
+.flow-desc{font-size:12px;color:var(--ink3);font-family:'Noto Sans SC',sans-serif;line-height:1.6;padding:0 8px;}
+.flow-line{flex:1;height:1px;background:var(--line-soft);margin-top:20px;min-width:20px;}
+/* ══ Footer ══ */
+.foot-cta{background:var(--dark);}
+.foot-cta-inner{max-width:var(--max);margin:0 auto;padding:100px var(--pad) 80px;}
+.foot-cta-top{margin-bottom:56px;}
+.foot-cta-en{font-size:clamp(15px,1.8vw,22px);color:rgba(255,255,255,.4);letter-spacing:.04em;font-family:'Inter',sans-serif;display:block;margin-bottom:20px;font-weight:300;}
+.foot-cta-h{font-family:'Noto Sans SC',sans-serif;font-size:clamp(32px,5vw,68px);font-weight:500;line-height:1.05;letter-spacing:-.04em;color:#fff;}
+.foot-cta-h .lt{color:rgba(255,255,255,.45);font-weight:300;}
+.foot-cta-bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding-top:48px;}
+.foot-cta-bottom>div{text-align:left;}
+.foot-cta-bottom>div:nth-child(2){justify-self:center;}
+.foot-cta-bottom>div:nth-child(3){justify-self:end;}
+.foot-contact-key{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.06em;text-transform:uppercase;font-family:'Inter',sans-serif;margin-bottom:10px;display:block;}
+.foot-contact-val{font-size:clamp(15px,1.6vw,18px);color:#fff;font-family:'Inter',sans-serif;font-weight:300;}
+footer{background:var(--dark);}
+.footer-inner{max-width:var(--max);margin:0 auto;padding:22px var(--pad);display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.07);}
+.footer-inner span{font-size:12px;color:rgba(255,255,255,.25);font-family:'Inter',sans-serif;letter-spacing:.04em;}
+
+/* reveal */
+.r{opacity:0;transform:translateY(32px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+.r.in{opacity:1;transform:none;}
+@keyframes slideUp{to{transform:translateY(0);}}
+@keyframes fadeIn{to{opacity:1;}}
+
+/* ══ 移动端汉堡菜单 ══ */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;border:none;background:transparent;cursor:pointer;padding:0;}
+.nav-burger span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;margin:0 auto;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{position:fixed;top:74px;left:24px;right:24px;z-index:499;background:rgba(255,255,255,.97);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(0,0,0,.06);box-shadow:0 16px 48px rgba(0,0,0,.14);border-radius:22px;padding:10px;flex-direction:column;gap:2px;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1);display:none;}
+.mobile-menu.open{opacity:1;transform:translateY(0);pointer-events:all;}
+.mm-link{display:block;padding:14px 20px;border-radius:14px;font-size:16px;color:var(--ink);font-family:'Noto Sans SC',sans-serif;transition:background .2s;}
+.mm-link:hover,.mm-link:active{background:rgba(0,0,0,.05);}
+.mm-cta{background:var(--ink);color:#fff;text-align:center;margin-top:6px;font-weight:500;}
+.mm-cta:hover,.mm-cta:active{background:var(--dark3);}
+
+@media(max-width:900px){
+  :root{--pad:24px;}
+  .nav-links{display:none;}
+  .nav-right{display:none;}
+  .nav-burger{display:flex;}
+  .mobile-menu{display:flex;}
+  nav{padding:8px 8px 8px 14px;}
+  nav.collapsed{width:min(calc(100% - 56px),var(--max));}
+  .proj-row{grid-template-columns:1fr;gap:32px;padding:48px 0;}
+  .proj-row.flip .proj-left{order:1;}
+  .proj-row.flip .proj-visual{order:2;}
+  .story-flow{flex-direction:column;align-items:flex-start;gap:24px;}
+  .flow-step{width:100%;align-items:flex-start;text-align:left;}
+  .flow-line{display:none;}
+  .foot-cta-bottom{grid-template-columns:1fr;gap:24px;}
+}
+</style>
+</head>
+<body>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<div class="nav-outer">
+  <nav id="nav">
+    <a class="nav-logo" href="index.html">
+      <div class="logo-icon">豆</div>
+      <span class="logo-name">周晓豆</span>
+    </a>
+    <div class="nav-links">
+      <a class="nl" href="index.html">首页</a>
+      <span class="nl on">工作</span>
+      <a class="nl" href="playground.html">练习</a>
+      <a class="nl" href="about.html">关于</a>
+    </div>
+    <div class="nav-right"><a class="nav-cta" href="contact.html">联系我</a></div>
+    <button class="nav-burger" id="navBurger" aria-label="菜单"><span></span><span></span><span></span></button>
+  </nav>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mm-link">首页</a>
+  <a href="work.html" class="mm-link">工作</a>
+  <a href="playground.html" class="mm-link">练习</a>
+  <a href="about.html" class="mm-link">关于</a>
+  <a href="contact.html" class="mm-link mm-cta">联系我</a>
+</div>
+
+<!-- 页面头部 — 与首页格式统一，去线条 -->
+<div class="work-head">
+  <div class="wh-badge-row">
+    <span class="av">CAREER · 2023—2026</span>
+  </div>
+  <div class="wh-title-row">
+    <h1 class="wh-title"><span class="wh-title-inner">工作</span></h1>
+    <p class="wh-sub">专注 AI 产品、健康医疗与智能硬件的设计实践。每个项目都关注从用户洞察到最终体验的完整设计推理。</p>
+  </div>
+  <div class="wh-filter">
+    <span class="filter-tag on" onclick="filterWork(this,'all')">全部</span>
+    <span class="filter-tag" onclick="filterWork(this,'ai')">AI 产品</span>
+    <span class="filter-tag" onclick="filterWork(this,'health')">健康医疗</span>
+    <span class="filter-tag" onclick="filterWork(this,'hw')">智能硬件</span>
+  </div>
+</div>
+
+<!-- 作品列表 — 交错布局 + 单张大图 -->
+<div class="work-list-section">
+<div class="work-list">
+
+  <!-- 01 智能袜 -->
+  <div class="proj-row r" data-cat="hw health" onclick="location.href='case-babysocks.html'" style="cursor:pointer;">
+    <div class="proj-left">
+      <div class="proj-content">
+        <div class="proj-tags">
+          <span class="wl-tag hw">智能硬件</span>
+          <span class="wl-tag health">母婴健康</span>
+          <span class="wl-tag">从 0 到 1</span>
+        </div>
+        <h2 class="proj-name">Baby Smart Socks</h2>
+        <p class="proj-desc">婴儿健康监测智能硬件，从用户洞察到完整产品设计。围绕"让宝妈放心"展开的完整设计流程。</p>
+        <span class="proj-link">查看案例 <span class="pl-arr">→</span></span>
+      </div>
+    </div>
+    <div class="proj-visual">
+      <div class="proj-img-wrap">
+        <img src="images/work-babysocks.jpg" alt="Baby Smart Socks">
+        <div class="proj-view-hint"><span>查看案例 →</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 G Band（交错）-->
+  <div class="proj-row flip r" data-cat="ai health hw" onclick="location.href='case-gband.html'" style="cursor:pointer;">
+    <div class="proj-left">
+      <div class="proj-content">
+        <div class="proj-tags">
+          <span class="wl-tag ai">AI</span>
+          <span class="wl-tag health">健康医疗</span>
+          <span class="wl-tag">多端设计</span>
+        </div>
+        <h2 class="proj-name">G Band 智能健康 APP</h2>
+        <p class="proj-desc">成熟健康监测产品的设计迭代，含 AI 健康报告、中风预防、微体检与 Watch UI 多端设计。</p>
+        <span class="proj-link">查看案例 <span class="pl-arr">→</span></span>
+      </div>
+    </div>
+    <div class="proj-visual">
+      <div class="proj-img-wrap">
+        <img src="images/work-gband.jpg" alt="G Band">
+        <div class="proj-view-hint"><span>查看案例 →</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 AI 小程序 -->
+  <div class="proj-row r" data-cat="ai" onclick="location.href='case-zhuifeng.html'" style="cursor:pointer;">
+    <div class="proj-left">
+      <div class="proj-content">
+        <div class="proj-tags">
+          <span class="wl-tag ai">AI</span>
+          <span class="wl-tag">小程序</span>
+          <span class="wl-tag">从 0 到 1</span>
+        </div>
+        <h2 class="proj-name">隹风 AI 养成小程序</h2>
+        <p class="proj-desc">一只会陪你聊天、陪你成长的 AI 伙伴。含 AI 对话、IP 养成升级与小游戏。一次方向超前但资源受限的探索。</p>
+        <span class="proj-link">查看案例 <span class="pl-arr">→</span></span>
+      </div>
+    </div>
+    <div class="proj-visual">
+      <div class="proj-img-wrap">
+        <img src="images/work-zhuifeng.jpg" alt="隹风">
+        <div class="proj-view-hint"><span>查看案例 →</span></div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+<!-- 详情页结构示意 -->
+<div class="detail-section">
+  <div class="detail-inner">
+    <div class="detail-banner r">
+      <p class="db-eyebrow">My Workflow</p>
+      <h2 class="db-title">我的项目流程</h2>
+      <p class="db-note">从背景到复盘，每个项目都走完整一遍 · 点击任一作品进入完整案例</p>
+    </div>
+    <div class="story-flow">
+      <div class="flow-step r">
+        <div class="flow-dot">01</div>
+        <div class="flow-name">理解背景</div>
+        <div class="flow-desc">项目从何而来，业务背景与我的角色。</div>
+      </div>
+      <div class="flow-line"></div>
+      <div class="flow-step r">
+        <div class="flow-dot">02</div>
+        <div class="flow-name">研究与洞察</div>
+        <div class="flow-desc">梳理真正要解决的挑战，从研究中提炼关键发现。</div>
+      </div>
+      <div class="flow-line"></div>
+      <div class="flow-step r">
+        <div class="flow-dot">03</div>
+        <div class="flow-name">设计推演</div>
+        <div class="flow-desc">从判断、策略到信息架构与界面落地的推演过程。</div>
+      </div>
+      <div class="flow-line"></div>
+      <div class="flow-step r">
+        <div class="flow-dot">04</div>
+        <div class="flow-name">落地交付</div>
+        <div class="flow-desc">核心界面、关键流程与多端适配的最终呈现。</div>
+      </div>
+      <div class="flow-line"></div>
+      <div class="flow-step r">
+        <div class="flow-dot">05</div>
+        <div class="flow-name">复盘</div>
+        <div class="flow-desc">回顾结果与反思，不同项目侧重点不同。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOT CTA -->
+<div class="foot-cta">
+  <div class="foot-cta-inner">
+    <div class="foot-cta-top">
+      <span class="foot-cta-en">Designing products. Observing the world.</span>
+      <h2 class="foot-cta-h">设计产品，<span class="lt">也观察世界。</span></h2>
+    </div>
+    <div class="foot-cta-bottom">
+      <div><span class="foot-contact-key">Email</span><span class="foot-contact-val">2848053991@qq.com</span></div>
+      <div><span class="foot-contact-key">WeChat</span><span class="foot-contact-val">ZXD-615</span></div>
+      <div><span class="foot-contact-key">Tel</span><span class="foot-contact-val">159 0348 4071</span></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2025 Zhou Xiaodou · 周晓豆</span>
+    <span>UI / UX · Product Designer — Beijing</span>
+  </div>
+</footer>
+
+<script>
+/* 标题入场兜底 */
+/* 光标 */
+const ring=document.getElementById('cursor-ring');
+let cx=window.innerWidth/2,cy=window.innerHeight/2,rx=cx,ry=cy;
+window.addEventListener('mousemove',e=>{
+  cx=e.clientX;cy=e.clientY;
+  const el=document.elementFromPoint(cx,cy);
+  if(el&&el.closest('.foot-cta,footer')){document.body.classList.add('cursor-dark');}
+  else{document.body.classList.remove('cursor-dark');}
+},{passive:true});
+(function loop(){rx+=(cx-rx)*.2;ry+=(cy-ry)*.2;if(ring)ring.style.transform='translate('+rx+'px,'+ry+'px)';requestAnimationFrame(loop);})();
+const hoverSel='a,button,.nl,.nav-cta,.proj-img-wrap,.proj-link,.filter-tag,.flow-step,.nav-logo,.foot-contact-val';
+document.addEventListener('mouseover',e=>{if(e.target.closest(hoverSel))document.body.classList.add('cursor-hover');});
+document.addEventListener('mouseout',e=>{if(e.target.closest(hoverSel)&&!e.relatedTarget?.closest(hoverSel))document.body.classList.remove('cursor-hover');});
+
+/* 滚动入场 */
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.08});
+document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+
+/* 导航 */
+let lastY=0;const navEl=document.getElementById('nav');
+window.addEventListener('scroll',()=>{const y=window.scrollY;if(y>120&&y>lastY)navEl.classList.add('collapsed');else if(y<lastY||y<120)navEl.classList.remove('collapsed');lastY=y;},{passive:true});
+
+/* 筛选 */
+function filterWork(el,cat){
+  document.querySelectorAll('.filter-tag').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.proj-row').forEach(item=>{
+    const cats=item.getAttribute('data-cat')||'';
+    if(cat==='all'||cats.includes(cat)){item.style.display='grid';}
+    else{item.style.display='none';}
+  });
+}
+
+/* 移动端汉堡菜单 */
+const navBurger=document.getElementById('navBurger');
+const mobileMenu=document.getElementById('mobileMenu');
+if(navBurger&&mobileMenu){
+  navBurger.addEventListener('click',()=>{
+    navBurger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('.mm-link').forEach(l=>l.addEventListener('click',()=>{
+    navBurger.classList.remove('open');mobileMenu.classList.remove('open');
+  }));
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('#mobileMenu')&&!e.target.closest('#navBurger')){
+      navBurger.classList.remove('open');mobileMenu.classList.remove('open');
+    }
+  });
+}
+</script>
+</body>
+</html>

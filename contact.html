@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>联系 — 周晓豆</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+:root{
+  --bg:#FFFFFF;--bg-soft:#F7F7F5;--bg-mid:#EFEFEC;
+  --ink:#0A0A0A;--ink2:#454545;--ink3:#8A8A8A;
+  --line-soft:#E8E8E8;--paper:#F2F2EF;
+  --dark:#0A0A0A;--dark3:#222222;
+  --max:1320px;--pad:40px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans SC',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none;min-height:100vh;display:flex;flex-direction:column;}
+a{text-decoration:none;color:inherit;}
+::selection{background:var(--ink);color:var(--bg);}
+@media(max-width:900px){body{cursor:auto;}#cursor-ring{display:none;}}
+
+#cursor-ring{position:fixed;z-index:9998;pointer-events:none;left:0;top:0;width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);margin:-11px 0 0 -11px;transition:width .25s cubic-bezier(.16,1,.3,1),height .25s cubic-bezier(.16,1,.3,1),margin .25s,border-color .25s,background .25s;will-change:transform;}
+.cursor-hover #cursor-ring{width:40px;height:40px;margin:-20px 0 0 -20px;border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.05);}
+
+/* ══ NAV ══ */
+.nav-outer{position:fixed;top:18px;left:0;right:0;z-index:500;display:flex;justify-content:center;pointer-events:none;}
+nav{pointer-events:all;display:grid;grid-template-columns:minmax(140px,1fr) auto minmax(140px,1fr);align-items:center;background:rgba(20,20,20,.55);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.12);box-shadow:0 4px 32px rgba(0,0,0,.3);border-radius:100px;padding:9px 12px 9px 18px;width:min(calc(100% - 56px),var(--max));}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;transition:opacity .2s;}
+.nav-logo:hover{opacity:.5;}
+.logo-icon{width:34px;height:34px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--ink);font-family:'Noto Sans SC',sans-serif;flex-shrink:0;}
+.logo-name{font-size:16px;font-weight:600;color:#fff;font-family:'Noto Sans SC',sans-serif;letter-spacing:-.02em;white-space:nowrap;}
+.nav-links{display:flex;align-items:center;justify-content:center;gap:4px;}
+.nl{font-size:15px;color:rgba(255,255,255,.55);cursor:pointer;padding:8px 18px;border-radius:100px;transition:color .2s,background .2s;font-family:'Noto Sans SC',sans-serif;white-space:nowrap;position:relative;}
+.nl:hover{color:#fff;background:rgba(255,255,255,.08);}
+.nl.on{color:#fff;font-weight:500;}
+.nl.on::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:#fff;}
+.nav-right{display:flex;justify-content:flex-end;}
+.nav-cta{font-size:14px;font-weight:600;color:var(--ink);background:#fff;padding:10px 24px;border-radius:100px;cursor:pointer;transition:opacity .2s,transform .25s cubic-bezier(.34,1.56,.64,1);font-family:'Noto Sans SC',sans-serif;white-space:nowrap;}
+.nav-cta:hover{opacity:.8;transform:scale(.97);}
+
+/* ══ 主体 — 黑色全屏 ══ */
+.contact-main{flex:1;background:var(--dark);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:140px 0 60px;}
+/* 背景大字装饰 */
+.contact-bg{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);font-family:'Inter',sans-serif;font-size:min(280px,32vw);font-weight:900;letter-spacing:-.06em;color:rgba(255,255,255,.025);pointer-events:none;user-select:none;white-space:nowrap;line-height:1;}
+.contact-inner{max-width:var(--max);margin:0 auto;padding:0 var(--pad);width:100%;position:relative;z-index:1;}
+
+.contact-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);padding:7px 16px;border-radius:100px;font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.06em;font-family:'Inter',sans-serif;margin-bottom:36px;opacity:0;transform:translateY(16px);animation:up .7s cubic-bezier(.16,1,.3,1) forwards .1s;}
+.cb-dot{width:7px;height:7px;border-radius:50%;background:#4CAF7D;animation:glw 2s infinite;}
+@keyframes glw{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+.contact-title{font-family:'Noto Sans SC',sans-serif;font-weight:500;font-size:clamp(44px,7vw,108px);line-height:1.0;letter-spacing:-.04em;color:#fff;margin-bottom:24px;}
+.contact-title .line{display:block;overflow:hidden;}
+.contact-title .line>span{display:block;transform:translateY(110%);animation:slideUp 1s cubic-bezier(.16,1,.3,1) forwards;}
+.contact-title .l1>span{animation-delay:.15s;}
+.contact-title .l2>span{animation-delay:.27s;}
+.contact-title .lt{color:rgba(255,255,255,.4);font-weight:300;}
+
+.contact-sub{font-family:'Noto Sans SC',sans-serif;font-size:clamp(15px,1.7vw,19px);font-weight:300;color:rgba(255,255,255,.55);line-height:1.7;max-width:520px;margin-bottom:64px;opacity:0;animation:fadeIn .9s ease forwards .6s;}
+
+/* 联系方式列表 */
+.contact-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;opacity:0;animation:fadeIn .9s ease forwards .75s;}
+.cm-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;padding:32px 30px;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:background .35s,border-color .35s,transform .45s cubic-bezier(.16,1,.3,1);
+}
+.cm-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);transform:translateY(-6px);}
+.cm-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);font-family:'Inter',sans-serif;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+.cm-icon{font-size:15px;}
+.cm-value{font-family:'Inter',sans-serif;font-size:clamp(16px,1.7vw,20px);font-weight:400;color:#fff;letter-spacing:.01em;word-break:break-all;line-height:1.3;}
+.cm-action{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.4);font-family:'Noto Sans SC',sans-serif;margin-top:20px;transition:color .3s,gap .3s;}
+.cm-card:hover .cm-action{color:rgba(255,255,255,.85);gap:10px;}
+.cm-copied{position:absolute;top:30px;right:30px;font-size:12px;color:#4CAF7D;font-family:'Noto Sans SC',sans-serif;opacity:0;transform:translateY(-4px);transition:opacity .3s,transform .3s;}
+.cm-card.copied .cm-copied{opacity:1;transform:translateY(0);}
+
+/* 底部状态行 */
+.contact-foot-row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:64px;padding-top:32px;border-top:1px solid rgba(255,255,255,.1);opacity:0;animation:fadeIn .9s ease forwards .9s;}
+.cf-status{font-family:'Noto Sans SC',sans-serif;font-size:15px;color:rgba(255,255,255,.7);font-weight:300;}
+.cf-status b{color:#fff;font-weight:500;}
+.cf-back{font-size:14px;color:rgba(255,255,255,.5);font-family:'Noto Sans SC',sans-serif;cursor:pointer;display:flex;align-items:center;gap:8px;transition:color .25s,gap .25s;}
+.cf-back:hover{color:#fff;gap:12px;}
+
+footer{background:var(--dark);}
+.footer-inner{max-width:var(--max);margin:0 auto;padding:22px var(--pad);display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.07);}
+.footer-inner span{font-size:12px;color:rgba(255,255,255,.25);font-family:'Inter',sans-serif;letter-spacing:.04em;}
+
+@keyframes up{to{opacity:1;transform:translateY(0);}}
+@keyframes slideUp{to{transform:translateY(0);}}
+@keyframes fadeIn{to{opacity:1;}}
+
+/* ══ 移动端汉堡菜单（深色）══ */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;border:none;background:transparent;cursor:pointer;padding:0;}
+.nav-burger span{display:block;width:20px;height:2px;background:#fff;border-radius:2px;margin:0 auto;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{position:fixed;top:74px;left:24px;right:24px;z-index:499;background:rgba(20,20,20,.92);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(255,255,255,.12);box-shadow:0 16px 48px rgba(0,0,0,.4);border-radius:22px;padding:10px;flex-direction:column;gap:2px;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1);display:none;}
+.mobile-menu.open{opacity:1;transform:translateY(0);pointer-events:all;}
+.mm-link{display:block;padding:14px 20px;border-radius:14px;font-size:16px;color:rgba(255,255,255,.85);font-family:'Noto Sans SC',sans-serif;transition:background .2s,color .2s;}
+.mm-link:hover,.mm-link:active{background:rgba(255,255,255,.08);color:#fff;}
+.mm-cta{background:#fff;color:var(--ink);text-align:center;margin-top:6px;font-weight:500;}
+.mm-cta:hover,.mm-cta:active{background:rgba(255,255,255,.85);color:var(--ink);}
+
+@media(max-width:900px){
+  :root{--pad:24px;}
+  .nav-links{display:none;}
+  .nav-right{display:none;}
+  .nav-burger{display:flex;}
+  .mobile-menu{display:flex;}
+  nav{padding:8px 8px 8px 14px;}
+  .contact-methods{grid-template-columns:1fr;}
+  .contact-foot-row{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<div class="nav-outer">
+  <nav id="nav">
+    <a class="nav-logo" href="index.html">
+      <div class="logo-icon">豆</div>
+      <span class="logo-name">周晓豆</span>
+    </a>
+    <div class="nav-links">
+      <a class="nl" href="index.html">首页</a>
+      <a class="nl" href="work.html">工作</a>
+      <a class="nl" href="playground.html">练习</a>
+      <a class="nl" href="about.html">关于</a>
+    </div>
+    <div class="nav-right"><a class="nav-cta" href="contact.html">联系我</a></div>
+    <button class="nav-burger" id="navBurger" aria-label="菜单"><span></span><span></span><span></span></button>
+  </nav>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mm-link">首页</a>
+  <a href="work.html" class="mm-link">工作</a>
+  <a href="playground.html" class="mm-link">练习</a>
+  <a href="about.html" class="mm-link">关于</a>
+  <a href="contact.html" class="mm-link mm-cta">联系我</a>
+</div>
+
+<!-- 主体 -->
+<div class="contact-main">
+  <div class="contact-bg">CONTACT</div>
+  <div class="contact-inner">
+    <div class="contact-badge"><span class="cb-dot"></span>OPEN TO WORK · 在职，开放新机会</div>
+    <h1 class="contact-title">
+      <span class="line l1"><span>有好的项目，</span></span>
+      <span class="line l2"><span class="lt">欢迎随时聊聊。</span></span>
+    </h1>
+    <p class="contact-sub">
+      无论是全职机会、设计合作，还是只是想交流几句关于设计的想法，<br>
+      都欢迎通过下面任意一种方式找到我。
+    </p>
+
+    <!-- 联系方式 -->
+    <div class="contact-methods">
+      <div class="cm-card" onclick="copyText(this,'2848053991@qq.com')">
+        <span class="cm-copied">已复制 ✓</span>
+        <div class="cm-label"><span class="cm-icon">✉️</span>Email</div>
+        <div class="cm-value">2848053991@qq.com</div>
+        <div class="cm-action">点击复制邮箱 →</div>
+      </div>
+      <div class="cm-card" onclick="copyText(this,'ZXD-615')">
+        <span class="cm-copied">已复制 ✓</span>
+        <div class="cm-label"><span class="cm-icon">💬</span>WeChat</div>
+        <div class="cm-value">ZXD-615</div>
+        <div class="cm-action">点击复制微信号 →</div>
+      </div>
+      <div class="cm-card" onclick="copyText(this,'15903484071')">
+        <span class="cm-copied">已复制 ✓</span>
+        <div class="cm-label"><span class="cm-icon">📱</span>Tel</div>
+        <div class="cm-value">159 0348 4071</div>
+        <div class="cm-action">点击复制电话 →</div>
+      </div>
+    </div>
+
+    <!-- 底部状态 -->
+    <div class="contact-foot-row">
+      <p class="cf-status">坐标 <b>北京</b>，目前在职 · <b>开放新机会</b>，期待与你合作。</p>
+      <a class="cf-back" href="index.html">← 返回首页</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2025 Zhou Xiaodou · 周晓豆</span>
+    <span>UI / UX · Product Designer — Beijing</span>
+  </div>
+</footer>
+
+<script>
+const ring=document.getElementById('cursor-ring');
+let cx=window.innerWidth/2,cy=window.innerHeight/2,rx=cx,ry=cy;
+window.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;},{passive:true});
+(function loop(){rx+=(cx-rx)*.2;ry+=(cy-ry)*.2;if(ring)ring.style.transform='translate('+rx+'px,'+ry+'px)';requestAnimationFrame(loop);})();
+const hoverSel='a,button,.nl,.nav-cta,.cm-card,.cf-back,.nav-logo';
+document.addEventListener('mouseover',e=>{if(e.target.closest(hoverSel))document.body.classList.add('cursor-hover');});
+document.addEventListener('mouseout',e=>{if(e.target.closest(hoverSel)&&!e.relatedTarget?.closest(hoverSel))document.body.classList.remove('cursor-hover');});
+
+/* 点击复制 */
+function copyText(card,text){
+  const done=()=>{
+    card.classList.add('copied');
+    setTimeout(()=>card.classList.remove('copied'),1800);
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(()=>fallback(text,done));
+  }else{fallback(text,done);}
+}
+function fallback(text,cb){
+  const ta=document.createElement('textarea');
+  ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');}catch(e){}
+  document.body.removeChild(ta);cb&&cb();
+}
+
+/* 移动端汉堡菜单 */
+const navBurger=document.getElementById('navBurger');
+const mobileMenu=document.getElementById('mobileMenu');
+if(navBurger&&mobileMenu){
+  navBurger.addEventListener('click',()=>{
+    navBurger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('.mm-link').forEach(l=>l.addEventListener('click',()=>{
+    navBurger.classList.remove('open');mobileMenu.classList.remove('open');
+  }));
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('#mobileMenu')&&!e.target.closest('#navBurger')){
+      navBurger.classList.remove('open');mobileMenu.classList.remove('open');
+    }
+  });
+}
+</script>
+</body>
+</html>

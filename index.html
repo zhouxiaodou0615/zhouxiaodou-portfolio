@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>周晓豆 — Product Designer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+:root{
+  --bg:#FFFFFF;--bg-soft:#F7F7F5;--bg-mid:#EFEFEC;
+  --ink:#0A0A0A;--ink2:#454545;--ink3:#8A8A8A;
+  --line-soft:#E8E8E8;--paper:#F2F2EF;
+  --dark:#0A0A0A;--dark3:#222222;
+  --max:1320px;--pad:40px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans SC',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none;}
+@media(max-width:900px){body{cursor:auto;}#cursor-ring{display:none;}}
+#cursor-ring{
+  position:fixed;z-index:9998;pointer-events:none;
+  left:0;top:0;
+  width:22px;height:22px;border-radius:50%;
+  border:1.5px solid rgba(10,10,10,.3);
+  margin:-11px 0 0 -11px;
+  transition:width .25s cubic-bezier(.16,1,.3,1),height .25s cubic-bezier(.16,1,.3,1),margin .25s,border-color .25s,background .25s;
+  will-change:transform;
+}
+.cursor-hover #cursor-ring{width:40px;height:40px;margin:-20px 0 0 -20px;border-color:rgba(10,10,10,.5);background:rgba(10,10,10,.03);}
+/* 深色区域光标变白 */
+.cursor-dark #cursor-ring{border-color:rgba(255,255,255,.6);}
+.cursor-dark.cursor-hover #cursor-ring{border-color:rgba(255,255,255,.8);background:rgba(255,255,255,.05);}
+/* 深色区域：光标变白 */
+body.cursor-dark #cursor-ring{border-color:rgba(255,255,255,.45);}
+body.cursor-dark.cursor-hover #cursor-ring{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.05);}
+a{text-decoration:none;color:inherit;}
+::selection{background:var(--ink);color:var(--bg);}
+
+/* ══ NAV ══ */
+.nav-outer{position:fixed;top:18px;left:0;right:0;z-index:500;display:flex;justify-content:center;pointer-events:none;}
+nav{
+  pointer-events:all;display:grid;grid-template-columns:minmax(140px,1fr) auto minmax(140px,1fr);align-items:center;
+  background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
+  border:1px solid rgba(255,255,255,.9);box-shadow:0 4px 32px rgba(0,0,0,.07),0 0 0 .5px rgba(0,0,0,.04);
+  border-radius:100px;padding:9px 12px 9px 18px;
+  width:min(calc(100% - 56px),var(--max));
+  transition:width .55s cubic-bezier(.16,1,.3,1),background .45s ease,box-shadow .45s ease;
+}
+nav.collapsed{
+  width:min(calc(100% - 360px),720px);
+  background:rgba(255,255,255,.92);
+  box-shadow:0 10px 48px rgba(0,0,0,.13);
+}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;transition:opacity .2s;}
+.nav-logo:hover{opacity:.5;}
+.logo-icon{width:34px;height:34px;border-radius:10px;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;font-family:'Noto Sans SC',sans-serif;flex-shrink:0;}
+.logo-name{font-size:16px;font-weight:600;color:var(--ink);font-family:'Noto Sans SC',sans-serif;letter-spacing:-.02em;white-space:nowrap;}
+
+.nav-links{display:flex;align-items:center;justify-content:center;gap:4px;}
+.nl{font-size:15px;color:var(--ink3);cursor:pointer;padding:8px 18px;border-radius:100px;transition:color .2s,background .2s;font-family:'Noto Sans SC',sans-serif;white-space:nowrap;position:relative;}
+.nl:hover{color:var(--ink);background:rgba(0,0,0,.045);}
+.nl.on{color:var(--ink);font-weight:500;}
+.nl.on::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--ink);}
+.nav-right{display:flex;justify-content:flex-end;}
+.nav-cta{font-size:14px;font-weight:600;color:#fff;background:var(--ink);padding:10px 24px;border-radius:100px;cursor:pointer;transition:opacity .2s,transform .25s cubic-bezier(.34,1.56,.64,1);font-family:'Noto Sans SC',sans-serif;white-space:nowrap;}
+.nav-cta:hover{opacity:.74;transform:scale(.97);}
+
+/* ══ HERO ══ */
+.hero{max-width:var(--max);margin:0 auto;padding:0 var(--pad);}
+.hero-badge-row{display:flex;align-items:center;gap:12px;padding-top:190px;padding-bottom:72px;padding-left:.06em;}
+.av{font-size:12px;color:var(--ink);border:1px solid var(--ink);padding:5px 12px;border-radius:100px;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;letter-spacing:.04em;}
+.av-dot{width:6px;height:6px;border-radius:50%;background:#4CAF7D;animation:glw 2s infinite;}
+@keyframes glw{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+.hero-headline{padding-bottom:44px;}
+.headline{font-family:'Noto Sans SC',sans-serif;font-weight:500;font-size:clamp(40px,6.5vw,96px);line-height:1.14;letter-spacing:-.04em;color:var(--ink);}
+.headline .line{display:block;overflow:hidden;padding:0 .06em;}
+.headline .line>span{display:block;transform:translateY(105%);padding-bottom:.04em;}
+.headline .lt{font-weight:300;color:var(--ink3);}
+.reveal-line.go>span{animation:lineUp 1s cubic-bezier(.16,1,.3,1) forwards;}
+.reveal-line.go.l1>span{animation-delay:.08s;}
+.reveal-line.go.l2>span{animation-delay:.2s;}
+@keyframes lineUp{to{transform:translateY(0);}}
+
+.hero-sub-row{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;padding-bottom:150px;opacity:0;animation:fadeIn .9s ease forwards .6s;}
+.hero-tagline{font-family:'Noto Sans SC',sans-serif;font-size:clamp(14px,1.4vw,18px);font-weight:300;color:var(--ink2);line-height:1.75;max-width:460px;}
+.hero-tagline b{font-weight:500;color:var(--ink);}
+.hero-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px;}
+.pill{font-size:12px;color:var(--ink2);border:1px solid var(--line-soft);padding:6px 14px;border-radius:100px;font-family:'Noto Sans SC',sans-serif;transition:all .25s cubic-bezier(.34,1.56,.64,1);cursor:default;}
+.pill:hover{background:var(--ink);color:#fff;border-color:var(--ink);transform:translateY(-2px);}
+.hero-right-info{text-align:right;flex-shrink:0;}
+.hero-role{font-size:13px;color:var(--ink3);letter-spacing:.04em;font-family:'Inter',sans-serif;line-height:1.75;}
+.hero-scroll-hint{display:flex;align-items:center;gap:8px;justify-content:flex-end;font-size:12px;color:var(--ink3);font-family:'Inter',sans-serif;margin-top:12px;animation:bounce 2s ease-in-out infinite 1.5s;letter-spacing:.04em;cursor:pointer;transition:color .25s,gap .25s;}
+.hero-scroll-hint:hover{color:var(--ink);gap:12px;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(4px);}}
+
+/* ══ SECTION 通用标题 — 与精选作品统一 ══ */
+.sec-label{font-size:12px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;font-family:'Inter',sans-serif;display:block;margin-bottom:8px;font-weight:400;}
+.sec-h{font-family:'Noto Sans SC',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:500;color:var(--ink);letter-spacing:-.03em;}
+.sec-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:36px;}
+.sec-more{font-size:13px;color:var(--ink3);border-bottom:1px solid var(--line-soft);padding-bottom:2px;cursor:pointer;transition:all .2s;font-family:'Noto Sans SC',sans-serif;text-decoration:none;display:inline-block;}
+.sec-more:hover{color:var(--ink);border-color:var(--ink);}
+.sec-more:hover{color:var(--ink);border-color:var(--ink);}
+
+/* ══ WORK ══ */
+.work-section{background:var(--bg-soft);border-top:1px solid var(--line-soft);}
+.work-strip{max-width:var(--max);margin:0 auto;padding:80px var(--pad);}
+.work-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;}
+.work-blk{cursor:pointer;position:relative;}
+.work-blk.b1{grid-column:1/8;}
+.work-blk.b2{grid-column:8/13;align-self:end;}
+.work-img{width:100%;aspect-ratio:4/3;background:var(--bg-soft);overflow:hidden;position:relative;border-radius:16px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line-soft);}
+.work-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1);}
+.work-blk:hover .work-img img{transform:scale(1.04);}
+.work-img-ph{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink3);font-size:12px;font-family:'Noto Sans SC',sans-serif;}
+.work-img-ph .ic{font-size:28px;opacity:.18;}
+.work-view{position:absolute;inset:0;background:rgba(10,10,10,0);display:flex;align-items:center;justify-content:center;transition:background .5s;}
+.work-view span{color:#fff;font-size:14px;letter-spacing:.04em;font-family:'Noto Sans SC',sans-serif;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s;border:1px solid rgba(255,255,255,.5);padding:10px 24px;border-radius:100px;backdrop-filter:blur(4px);}
+.work-blk:hover .work-view{background:rgba(10,10,10,.2);}
+.work-blk:hover .work-view span{opacity:1;transform:translateY(0);}
+.work-info{display:flex;justify-content:space-between;align-items:flex-start;padding-top:18px;gap:16px;}
+.work-idx{font-size:12px;color:var(--ink3);font-family:'Inter',sans-serif;letter-spacing:.06em;margin-bottom:10px;}
+.work-title{font-family:'Noto Sans SC',sans-serif;font-size:clamp(20px,2vw,28px);font-weight:500;letter-spacing:-.02em;line-height:1.15;color:var(--ink);margin-bottom:8px;}
+.work-tags{font-size:13px;color:var(--ink2);font-family:'Noto Sans SC',sans-serif;font-weight:300;}
+.work-arrow{font-size:22px;color:var(--ink);flex-shrink:0;transition:transform .4s cubic-bezier(.34,1.56,.64,1);}
+.work-blk:hover .work-arrow{transform:translate(4px,-4px);}
+
+/* ══ SKILLS ══ */
+.skills-section{background:var(--bg-mid);border-top:1px solid var(--line-soft);}
+.skills{max-width:var(--max);margin:0 auto;padding:90px var(--pad);}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.skills-h{font-family:'Noto Sans SC',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:500;letter-spacing:-.03em;color:var(--ink);line-height:1.1;margin-bottom:40px;}
+.skills-stack-label{font-size:13px;color:var(--ink3);letter-spacing:.04em;margin-bottom:16px;font-family:'Noto Sans SC',sans-serif;}
+.tool-row{display:flex;gap:10px;flex-wrap:wrap;}
+.tool{height:52px;min-width:52px;padding:0 16px;border-radius:14px;background:var(--ink);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .2s;cursor:default;white-space:nowrap;}
+.tool:hover{transform:translateY(-4px) scale(1.05);opacity:.85;}
+.skills-r{display:flex;flex-direction:column;gap:0;}
+.service-item{display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:1px solid rgba(0,0,0,.06);transition:padding-left .3s;cursor:default;}
+.service-item:hover{padding-left:12px;}
+.service-ic{width:40px;height:40px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0;}
+.service-name{font-family:'Noto Sans SC',sans-serif;font-size:17px;font-weight:400;color:var(--ink);}
+
+/* ══ ABOUT ══ */
+.about-section{background:var(--bg);border-top:1px solid var(--line-soft);}
+.about{max-width:var(--max);margin:0 auto;padding:90px var(--pad);}
+.about-headline{font-family:'Noto Sans SC',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:500;letter-spacing:-.03em;line-height:1.1;color:var(--ink);margin-bottom:56px;}
+.about-headline .lt{color:var(--ink3);font-weight:300;}
+.about-grid{display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:start;}
+.about-photo{width:100%;aspect-ratio:3/4;border-radius:20px;overflow:hidden;background:var(--paper);border:1px solid var(--line-soft);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink3);font-size:12px;font-family:'Noto Sans SC',sans-serif;position:relative;margin-bottom:20px;}
+.about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.about-photo .ic{font-size:36px;opacity:.18;}
+.about-name{font-family:'Noto Sans SC',sans-serif;font-size:22px;font-weight:500;color:var(--ink);letter-spacing:-.02em;}
+.about-role-txt{font-size:13px;color:var(--ink3);margin-top:4px;font-family:'Noto Sans SC',sans-serif;}
+.history-label{font-size:13px;color:var(--ink3);margin:28px 0 12px;font-family:'Noto Sans SC',sans-serif;}
+.history-list{display:flex;flex-direction:column;gap:8px;}
+.history-card{background:var(--bg);border:1px solid var(--line-soft);border-radius:14px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;transition:transform .3s,box-shadow .3s,opacity .5s,max-height .5s ease,padding .4s,border-color .4s;cursor:pointer;}
+.history-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06);}
+.hc-company{font-family:'Noto Sans SC',sans-serif;font-size:15px;font-weight:500;color:var(--ink);}
+.hc-role{font-size:12px;color:var(--ink3);margin-top:3px;font-family:'Noto Sans SC',sans-serif;}
+.hc-year{font-size:12px;color:var(--ink3);font-family:'Inter',sans-serif;letter-spacing:.04em;flex-shrink:0;}
+
+/* 折叠卡片 — 堆叠效果 */
+.history-list{cursor:pointer;}
+.history-stack{position:relative;padding-bottom:18px;transition:padding-bottom .5s;}
+.history-stack.expanded{padding-bottom:0;}
+.history-stack > .history-card:first-child{position:relative;z-index:3;}
+/* 收起态：后两张藏在第一张下方，露出边缘形成堆叠感 */
+.history-card.collapsible{
+  position:absolute;left:0;right:0;top:0;
+  z-index:2;
+  max-height:80px;
+  transform:translateY(8px) scale(.96);
+  opacity:1;
+  pointer-events:none;
+  transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .4s ease,position .4s;
+  box-shadow:0 4px 16px rgba(0,0,0,.04);
+}
+.history-card.collapsible.c2{
+  z-index:1;
+  transform:translateY(16px) scale(.92);
+}
+/* 展开态：变回正常文档流 */
+
+.history-stack.expanded .history-card.collapsible{
+  position:relative;
+  transform:translateY(0) scale(1);
+  margin-top:8px;
+  pointer-events:auto;
+  box-shadow:none;
+}
+
+/* 展开按钮 */
+.history-toggle{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:13px;color:var(--ink3);cursor:pointer;margin-top:16px;
+  font-family:'Noto Sans SC',sans-serif;border:none;background:none;padding:8px 0;
+  transition:color .2s;
+}
+.history-toggle:hover{color:var(--ink);}
+.tog-ic{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--ink);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:13px;transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.history-toggle.open .tog-ic{transform:rotate(180deg);}
+
+/* 右侧文案 — 方案B大圆角边框 */
+.about-text-col{padding-top:4px;}
+.about-block{
+  padding:0 0 28px;
+  margin-bottom:28px;
+  border-bottom:1px solid var(--line-soft);
+}
+.about-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.about-block-en{font-size:11px;color:var(--ink3);letter-spacing:.12em;text-transform:uppercase;font-family:'Inter',sans-serif;margin-bottom:8px;}
+.about-block-title{font-family:'Noto Sans SC',sans-serif;font-size:16px;font-weight:500;color:var(--ink);margin-bottom:10px;}
+.about-block-text{font-family:'Noto Sans SC',sans-serif;font-size:14px;font-weight:300;color:var(--ink2);line-height:1.85;}
+
+/* ══ PHOTOGRAPHY 黑色 ══ */
+.photo-section{background:var(--bg-soft);border-top:1px solid var(--line-soft);}
+.photo-wrap{max-width:var(--max);margin:0 auto;padding:90px var(--pad);}
+.photo-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;}
+.photo-hd-l{}
+.photo-hd-l .sec-label-dark{font-size:12px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;font-family:'Inter',sans-serif;display:block;margin-bottom:8px;}
+.photo-hd-l .sec-h-dark{font-family:'Noto Sans SC',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:500;color:var(--ink);letter-spacing:-.03em;}
+.photo-hd-r{font-size:14px;color:var(--ink3);border:1px solid var(--line-soft);padding:9px 20px;border-radius:100px;cursor:pointer;transition:all .3s;font-family:'Noto Sans SC',sans-serif;}
+.photo-hd-r:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+/* 3张 — 左1大 右2上下 */
+.pgrid{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:440px;}
+.pcell{border-radius:16px;overflow:hidden;background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:12px;gap:5px;font-family:'Noto Sans SC',sans-serif;transition:opacity .3s,transform .35s cubic-bezier(.34,1.56,.64,1);position:relative;border:1px solid var(--line-soft);}
+.pcell.tall{grid-row:1/3;}
+.pcell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+.pgrid:hover .pcell:not(:hover){opacity:.4;}
+.pcell:hover{transform:scale(1.02);}
+.pcell:hover img{transform:scale(1.08);}
+.ph-ic{font-size:22px;opacity:.25;}
+.photo-sub{font-size:14px;color:var(--ink3);font-family:'Noto Sans SC',sans-serif;margin-top:18px;font-weight:300;}
+
+/* ══ FOOT CTA ══ */
+.foot-cta{background:var(--dark);}
+.foot-cta-inner{
+  max-width:var(--max);margin:0 auto;
+  padding:100px var(--pad) 80px;
+}
+.foot-cta-top{margin-bottom:64px;}
+.foot-cta-en{font-size:clamp(14px,1.5vw,18px);color:rgba(255,255,255,.4);letter-spacing:.08em;font-family:'Inter',sans-serif;text-transform:uppercase;display:block;margin-bottom:20px;font-weight:400;}
+.foot-cta-h{font-family:'Noto Sans SC',sans-serif;font-size:clamp(32px,5vw,68px);font-weight:500;line-height:1.05;letter-spacing:-.04em;color:#fff;}
+.foot-cta-h .lt{color:rgba(255,255,255,.45);font-weight:300;}
+.foot-cta-bottom{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+  padding-top:0;
+}
+.foot-contact-col{text-align:left;}
+.foot-contact-col:nth-child(2){justify-self:center;}
+.foot-contact-col:nth-child(3){justify-self:end;}
+.foot-contact-key{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.06em;text-transform:uppercase;font-family:'Inter',sans-serif;margin-bottom:10px;display:block;}
+.foot-contact-val{font-size:clamp(15px,1.6vw,18px);color:#fff;font-family:'Inter',sans-serif;font-weight:300;letter-spacing:.01em;}
+footer{background:var(--dark);}
+.footer-inner{max-width:var(--max);margin:0 auto;padding:22px var(--pad);display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.07);}
+.footer-inner span{font-size:12px;color:rgba(255,255,255,.25);font-family:'Inter',sans-serif;letter-spacing:.04em;}
+
+/* reveal */
+.r{opacity:0;transform:translateY(32px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+.r.in{opacity:1;transform:none;}
+.r.d1{transition-delay:.06s;}.r.d2{transition-delay:.14s;}.r.d3{transition-delay:.22s;}
+@keyframes fadeIn{to{opacity:1;}}
+
+/* responsive */
+/* ══ 移动端汉堡菜单 ══ */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;border:none;background:transparent;cursor:pointer;padding:0;}
+.nav-burger span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;margin:0 auto;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{position:fixed;top:74px;left:24px;right:24px;z-index:499;background:rgba(255,255,255,.97);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1px solid rgba(0,0,0,.06);box-shadow:0 16px 48px rgba(0,0,0,.14);border-radius:22px;padding:10px;flex-direction:column;gap:2px;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1);display:none;}
+.mobile-menu.open{opacity:1;transform:translateY(0);pointer-events:all;}
+.mm-link{display:block;padding:14px 20px;border-radius:14px;font-size:16px;color:var(--ink);font-family:'Noto Sans SC',sans-serif;transition:background .2s;}
+.mm-link:hover,.mm-link:active{background:rgba(0,0,0,.05);}
+.mm-cta{background:var(--ink);color:#fff;text-align:center;margin-top:6px;font-weight:500;}
+.mm-cta:hover,.mm-cta:active{background:var(--dark3);}
+
+@media(max-width:900px){
+  :root{--pad:24px;}
+  .nav-links{display:none;}
+  .nav-right{display:none;}
+  .nav-burger{display:flex;}
+  .mobile-menu{display:flex;}
+  nav{padding:8px 8px 8px 14px;}
+  
+  .hero-sub-row{flex-direction:column;gap:24px;}
+  .hero-right-info{text-align:left;}
+  .hero-scroll-hint{justify-content:flex-start;}
+  .work-grid{grid-template-columns:1fr;gap:48px;}
+  .work-blk.b1,.work-blk.b2{grid-column:1;}
+  .skills-grid{grid-template-columns:1fr;gap:48px;}
+  .about-grid{grid-template-columns:1fr;gap:40px;}
+  .pgrid{grid-template-columns:1fr 1fr;grid-template-rows:240px;height:auto;}
+  .pcell.tall{grid-row:auto;}
+  .foot-cta-bottom{grid-template-columns:1fr;gap:24px;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<div class="nav-outer">
+  <nav id="nav">
+    <div class="nav-logo">
+      <div class="logo-icon">豆</div>
+      <span class="logo-name">周晓豆</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nl on">首页</a>
+      <a href="work.html" class="nl">工作</a>
+      <a href="playground.html" class="nl">练习</a>
+      <a href="about.html" class="nl">关于</a>
+    </div>
+    <div class="nav-right"><a class="nav-cta" href="contact.html">联系我</a></div>
+    <button class="nav-burger" id="navBurger" aria-label="菜单"><span></span><span></span><span></span></button>
+  </nav>
+</div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mm-link">首页</a>
+  <a href="work.html" class="mm-link">工作</a>
+  <a href="playground.html" class="mm-link">练习</a>
+  <a href="about.html" class="mm-link">关于</a>
+  <a href="contact.html" class="mm-link mm-cta">联系我</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge-row">
+    <span class="av"><span class="av-dot"></span>OPEN TO WORK</span>
+  </div>
+  <div class="hero-headline">
+    <h1 class="headline">
+      <span class="line reveal-line l1"><span>设计有温度的产品，</span></span>
+      <span class="line reveal-line l2"><span class="lt">连接人与技术。</span></span>
+    </h1>
+  </div>
+  <div class="hero-sub-row">
+    <div>
+      <p class="hero-tagline">
+        专注于 <b>AI 产品、健康医疗与智能硬件</b>的界面设计。<br>
+        把复杂的系统转化为清晰、可信、有温度的产品体验。
+      </p>
+      <div class="hero-pills">
+        <span class="pill">好奇</span>
+        <span class="pill">细节</span>
+        <span class="pill">克制</span>
+        <span class="pill">AI 产品</span>
+        <span class="pill">健康医疗</span>
+        <span class="pill">智能硬件</span>
+      </div>
+    </div>
+    <div class="hero-right-info">
+      <div class="hero-role">UI / UX · Product Designer · 北京</div>
+      <div class="hero-scroll-hint" onclick="document.getElementById('workSection').scrollIntoView({behavior:'smooth'})">Scroll to explore ↓</div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<div class="work-section" id="workSection">
+  <div class="work-strip">
+    <div class="sec-row r">
+      <div>
+        <span class="sec-label">Selected Work</span>
+        <h2 class="sec-h">精选作品</h2>
+      </div>
+      <a class="sec-more" href="work.html">View all →</a>
+    </div>
+    <div class="work-grid">
+      <div class="work-blk b1 r d1" onclick="location.href='case-babysocks.html'" style="cursor:pointer;">
+        <div class="work-img">
+          <img src="images/work-babysocks.jpg" alt="Baby Smart Socks">
+          <div class="work-view"><span>查看案例 →</span></div>
+        </div>
+        <div class="work-info">
+          <div>
+            <p class="work-idx">01 — Smart Hardware · 0→1</p>
+            <h3 class="work-title">Baby Smart Socks</h3>
+            <p class="work-tags">用户研究 · 竞品分析 · 信息架构 · UI 设计</p>
+          </div>
+          <span class="work-arrow">↗</span>
+        </div>
+      </div>
+      <div class="work-blk b2 r d2" onclick="location.href='case-gband.html'" style="cursor:pointer;">
+        <div class="work-img">
+          <img src="images/work-gband.jpg" alt="G Band">
+          <div class="work-view"><span>查看案例 →</span></div>
+        </div>
+        <div class="work-info">
+          <div>
+            <p class="work-idx">02 — AI · Health · Multi-platform</p>
+            <h3 class="work-title">G Band 智能健康 APP</h3>
+            <p class="work-tags">AI 健康报告 · 中风预防 · Watch UI</p>
+          </div>
+          <span class="work-arrow">↗</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="skills-section">
+  <div class="skills">
+    <div class="skills-grid">
+      <div class="skills-l r">
+        <span class="sec-label">Design Capabilities</span>
+        <h2 class="skills-h">设计能力</h2>
+        <p class="skills-stack-label" style="margin-top:40px;">工具栈 · Tech Stack</p>
+        <div class="tool-row">
+          <div class="tool">Figma</div>
+          <div class="tool">Ps</div>
+          <div class="tool">Ai</div>
+          <div class="tool">ChatGPT</div>
+          <div class="tool">Claude</div>
+          <div class="tool">Ae</div>
+        </div>
+      </div>
+      <div class="skills-r r">
+        <div class="service-item"><div class="service-ic">✚</div><span class="service-name">健康医疗界面</span></div>
+        <div class="service-item"><div class="service-ic">▤</div><span class="service-name">App / 小程序设计</span></div>
+        <div class="service-item"><div class="service-ic">◉</div><span class="service-name">AI 产品设计</span></div>
+        <div class="service-item"><div class="service-ic">⬚</div><span class="service-name">智能硬件 · 多端设计</span></div>
+        <div class="service-item"><div class="service-ic">◐</div><span class="service-name">用户研究 · 信息架构</span></div>
+        <div class="service-item"><div class="service-ic">✦</div><span class="service-name">AI 辅助设计 · 创意探索</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-section">
+  <div class="about">
+    <div class="sec-row r" style="margin-bottom:56px;">
+      <div>
+        <span class="sec-label">About Me</span>
+        <h2 class="about-headline">关于设计，<span class="lt">也关于我</span></h2>
+      </div>
+    </div>
+    <div class="about-grid">
+
+      <!-- 左侧 -->
+      <div class="r">
+        <div class="about-photo">
+          <img src="images/photo.jpg" alt="周晓豆">
+        </div>
+        <div class="about-name">周晓豆</div>
+        <div class="about-role-txt">UI / UX · Product Designer</div>
+
+        <p class="history-label">工作经历 · Work History</p>
+        <div class="history-list" id="historyList" onclick="toggleHist()">
+          <!-- 堆叠容器：收起时为单卡高度，展开后自然撑开 -->
+          <div class="history-stack" id="historyStack">
+            <!-- 第一张始终显示 -->
+            <div class="history-card">
+              <div><div class="hc-company">启瑞医疗</div><div class="hc-role">UI/UX Designer</div></div>
+              <div class="hc-year">2024 — 至今</div>
+            </div>
+            <!-- 其余默认折叠堆叠 -->
+            <div class="history-card collapsible c1">
+              <div><div class="hc-company">乾坤物联</div><div class="hc-role">UI/UX Designer</div></div>
+              <div class="hc-year">2024.03—09</div>
+            </div>
+            <div class="history-card collapsible c2">
+              <div><div class="hc-company">布格数码</div><div class="hc-role">UI/UX Designer</div></div>
+              <div class="hc-year">2023</div>
+            </div>
+          </div>
+        </div>
+        <button class="history-toggle" id="histToggle" onclick="toggleHist()">
+          <span id="histToggleText">查看全部</span>
+          <span class="tog-ic">↓</span>
+        </button>
+      </div>
+
+      <!-- 右侧 -->
+      <div class="about-text-col r">
+        <div class="about-block">
+          <div class="about-block-en">Focus · 专注领域</div>
+          <div class="about-block-title">专注 健康医疗、智能硬件、AI 产品设计</div>
+          <p class="about-block-text">
+            我目前主要从事健康医疗、智能硬件领域、AI 产品设计，关注复杂信息的可视化表达与用户体验优化，希望通过设计帮助用户更好地理解数据、理解产品。
+          </p>
+        </div>
+        <div class="about-block">
+          <div class="about-block-en">Journey · 设计历程</div>
+          <div class="about-block-title">从运营视觉到产品设计</div>
+          <p class="about-block-text">
+            从品牌视觉与运营设计起步，逐步转向产品设计领域，参与过电商运营、AI 产品、运动健康 App、智能硬件 App 等多个项目，积累了从视觉设计到用户体验设计的完整项目经验。
+          </p>
+        </div>
+        <div class="about-block">
+          <div class="about-block-en">Philosophy · 设计理念</div>
+          <div class="about-block-title">设计不仅是界面，更是体验</div>
+          <p class="about-block-text">
+            无论是 0→1 产品设计，还是成熟产品迭代优化，我始终关注用户需求与业务目标之间的平衡，通过设计建立产品价值与用户价值之间的连接。
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PHOTOGRAPHY -->
+<div class="photo-section">
+  <div class="photo-wrap">
+    <div class="photo-hd r">
+      <div class="photo-hd-l">
+        <span class="sec-label-dark">Beyond Work</span>
+        <span class="sec-h-dark">工作之外</span>
+      </div>
+      <a class="photo-hd-r" href="https://unsplash.com/@zxd0615" target="_blank" rel="noopener">前往摄影主页 ↗</a>
+    </div>
+    <div class="pgrid r">
+      <div class="pcell tall"><img src="images/play-photo-1.jpg" alt="摄影"></div>
+      <div class="pcell"><img src="images/home-photo-1.jpg" alt="摄影"></div>
+      <div class="pcell"><img src="images/play-photo-2.jpg" alt="摄影"></div>
+    </div>
+    <p class="photo-sub">用镜头观察世界，设计之外的另一种表达。</p>
+  </div>
+</div>
+
+<!-- FOOT CTA -->
+<div class="foot-cta">
+  <div class="foot-cta-inner">
+    <div class="foot-cta-top">
+      <span class="foot-cta-en">Designing products. Observing the world.</span>
+      <h2 class="foot-cta-h">设计产品，<span class="lt">也观察世界。</span></h2>
+    </div>
+    <div class="foot-cta-bottom">
+      <div class="foot-contact-col">
+        <span class="foot-contact-key">Email</span>
+        <span class="foot-contact-val">2848053991@qq.com</span>
+      </div>
+      <div class="foot-contact-col">
+        <span class="foot-contact-key">WeChat</span>
+        <span class="foot-contact-val">ZXD-615</span>
+      </div>
+      <div class="foot-contact-col">
+        <span class="foot-contact-key">Tel</span>
+        <span class="foot-contact-val">159 0348 4071</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2025 Zhou Xiaodou · 周晓豆</span>
+    <span>UI / UX · Product Designer — Beijing</span>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('load',()=>{document.querySelectorAll('.reveal-line').forEach(l=>l.classList.add('go'));});
+setTimeout(()=>{document.querySelectorAll('.reveal-line').forEach(l=>l.classList.add('go'));},100);
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});
+},{threshold:.08});
+document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+
+let lastY=0;
+const navEl=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  if(y>120&&y>lastY) navEl.classList.add('collapsed');
+  else if(y<lastY||y<120) navEl.classList.remove('collapsed');
+  lastY=y;
+},{passive:true});
+
+function setNav(el){
+  document.querySelectorAll('.nl').forEach(l=>l.classList.remove('on'));
+  el.classList.add('on');
+}
+
+/* 移动端汉堡菜单 */
+const navBurger=document.getElementById('navBurger');
+const mobileMenu=document.getElementById('mobileMenu');
+if(navBurger&&mobileMenu){
+  navBurger.addEventListener('click',()=>{
+    navBurger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('.mm-link').forEach(l=>l.addEventListener('click',()=>{
+    navBurger.classList.remove('open');mobileMenu.classList.remove('open');
+  }));
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('#mobileMenu')&&!e.target.closest('#navBurger')){
+      navBurger.classList.remove('open');mobileMenu.classList.remove('open');
+    }
+  });
+}
+
+/* 光标跟随 — transform 定位，丝滑不闪 */
+const ring=document.getElementById('cursor-ring');
+let cx=window.innerWidth/2,cy=window.innerHeight/2,rx=cx,ry=cy;
+window.addEventListener('mousemove',e=>{
+  cx=e.clientX;cy=e.clientY;
+  /* 检测光标下是否为深色区域 */
+  const el=document.elementFromPoint(cx,cy);
+  if(el&&el.closest('.foot-cta,footer')){
+    document.body.classList.add('cursor-dark');
+  } else {
+    document.body.classList.remove('cursor-dark');
+  }
+},{passive:true});
+(function curLoop(){
+  rx+=(cx-rx)*.2;ry+=(cy-ry)*.2;
+  if(ring) ring.style.transform='translate('+rx+'px,'+ry+'px)';
+  requestAnimationFrame(curLoop);
+})();
+/* 用事件委托，避免动态元素丢失监听 */
+const hoverSel='a,button,.nl,.nav-cta,.pill,.work-blk,.pcell,.tool,.service-item,.history-card,.history-toggle,.history-list,.sec-more,.photo-hd-r,.nav-logo,.foot-contact-val';
+document.addEventListener('mouseover',e=>{if(e.target.closest(hoverSel))document.body.classList.add('cursor-hover');});
+document.addEventListener('mouseout',e=>{if(e.target.closest(hoverSel)&&!e.relatedTarget?.closest(hoverSel))document.body.classList.remove('cursor-hover');});
+/* 检测光标进入深色区域 → 变白 */
+const darkZones=document.querySelectorAll('.foot-cta,footer');
+window.addEventListener('mousemove',e=>{
+  let inDark=false;
+  darkZones.forEach(z=>{
+    const r=z.getBoundingClientRect();
+    if(e.clientY>=r.top&&e.clientY<=r.bottom&&e.clientX>=r.left&&e.clientX<=r.right) inDark=true;
+  });
+  document.body.classList.toggle('cursor-dark',inDark);
+},{passive:true});
+
+
+/* 工作经历折叠/展开 */
+function toggleHist(){
+  const stack=document.getElementById('historyStack');
+  const tog=document.getElementById('histToggle');
+  const txt=document.getElementById('histToggleText');
+  const isExpanded=stack.classList.contains('expanded');
+  const cards=stack.querySelectorAll('.history-card.collapsible');
+  if(isExpanded){
+    stack.classList.remove('expanded');
+    tog.classList.remove('open');
+    txt.textContent='查看全部';
+    cards.forEach(c=>c.style.transitionDelay='0s');
+  } else {
+    stack.classList.add('expanded');
+    tog.classList.add('open');
+    txt.textContent='收起';
+    cards.forEach((c,i)=>{c.style.transitionDelay=(i*0.08)+'s';});
+  }
+}
+</script>
+</body>
+</html>
