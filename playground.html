@@ -64,7 +64,7 @@ nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9
 .pg-count{font-size:13px;color:var(--ink3);font-family:'Inter',sans-serif;letter-spacing:.06em;}
 
 /* 占位图通用 */
-.ph-img{background:var(--paper);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid var(--line-soft);}
+.ph-img{background:var(--paper);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
 .ph-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1);}
 .ph-img-label{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink3);font-size:12px;font-family:'Noto Sans SC',sans-serif;}
 .ph-img-label .ic{font-size:26px;opacity:.16;}
@@ -99,10 +99,12 @@ nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9
 .web-hd .pg-count{color:var(--ink3);}
 .web-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px;}
 .web-card{cursor:pointer;}
-.web-card .ph-img{width:100%;height:560px;border-radius:14px;background:var(--bg);overflow:hidden;position:relative;transition:box-shadow .5s,transform .5s cubic-bezier(.16,1,.3,1);}
+.web-card .ph-img{width:100%;height:560px;border-radius:14px;background:var(--bg);overflow:hidden;position:relative;display:flex;flex-direction:column;transition:box-shadow .5s,transform .5s cubic-bezier(.16,1,.3,1);}
 .web-card:hover .ph-img{box-shadow:0 28px 64px rgba(0,0,0,.12);transform:translateY(-6px);}
-.web-card .ph-img img{position:absolute;top:0;left:0;width:100%;height:auto;display:block;transform:translateY(0);transition:transform .8s cubic-bezier(.16,1,.3,1);}
-.web-card:hover .ph-img img{transform:translateY(calc(-100% + 560px));transition:transform 9s linear;}
+.web-nav{flex:0 0 auto;width:100%;position:relative;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+.web-nav img{display:block;position:static;inset:auto;width:100%;height:auto;object-fit:fill;}
+.web-body{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;position:relative;scrollbar-width:thin;-webkit-overflow-scrolling:touch;}
+.web-body img{display:block;position:static;inset:auto;width:100%;height:auto;object-fit:fill;}
 .web-scroll-hint{position:absolute;bottom:14px;right:14px;z-index:3;font-size:11px;color:#fff;background:rgba(10,10,10,.5);padding:5px 12px;border-radius:100px;font-family:'Noto Sans SC',sans-serif;backdrop-filter:blur(8px);opacity:0;transition:opacity .3s;pointer-events:none;}
 .web-card:hover .web-scroll-hint{opacity:1;}
 .web-card .ph-img-label{color:var(--ink3);}
@@ -126,7 +128,7 @@ nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9
 .track-scroll{display:flex;gap:16px;transition:transform .6s cubic-bezier(.16,1,.3,1);will-change:transform;}
 .track-viewport.dragging .track-scroll{transition:none;}
 .track-item{flex-shrink:0;width:480px;}
-.track-item .ph-img{width:100%;aspect-ratio:16/9;height:auto;border-radius:16px;background:var(--dark3);border:1px solid rgba(255,255,255,.08);overflow:hidden;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s;pointer-events:none;}
+.track-item .ph-img{width:100%;aspect-ratio:16/9;height:auto;border-radius:16px;background:var(--dark3);overflow:hidden;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s;pointer-events:none;}
 .track-item .ph-img img{width:100%;height:100%;object-fit:cover;}
 .track-item:hover .ph-img{box-shadow:0 20px 50px rgba(0,0,0,.4);}
 .track-item:hover .ph-img img{transform:scale(1.05);}
@@ -145,7 +147,7 @@ nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9
 .ai-flip-inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.16,1,.3,1);transform-style:preserve-3d;}
 .ai-flip:hover .ai-flip-inner{transform:rotateY(180deg);}
 .ai-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
-.ai-front{background:var(--bg);border:1px solid var(--line-soft);color:var(--ink3);font-size:12px;font-family:'Noto Sans SC',sans-serif;}
+.ai-front{background:var(--bg);color:var(--ink3);font-size:12px;font-family:'Noto Sans SC',sans-serif;}
 .ai-front .ic{font-size:28px;opacity:.4;}
 .ai-front img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .ai-back{background:var(--ai);transform:rotateY(180deg);padding:24px;text-align:center;}
@@ -203,7 +205,7 @@ footer{background:var(--dark);}
   .phone.p4,.phone.p5{display:block;}
   .ai-grid{grid-template-columns:1fr 1fr;}
   .track-item{width:78vw;max-width:420px;}
-  .track-viewport{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;cursor:default;}
+  .track-viewport{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scroll-padding-left:var(--pad);cursor:default;}
   .track-viewport::-webkit-scrollbar{display:none;}
   .track-viewport{scrollbar-width:none;}
   .track-scroll{transform:none !important;transition:none;}
@@ -285,7 +287,8 @@ footer{background:var(--dark);}
     <div class="web-grid">
       <div class="web-card r">
         <div class="ph-img">
-          <img src="images/play-web1.png" alt="网页设计练习 01">
+          <div class="web-nav"><img src="images/play-web1-nav.png" alt=""></div>
+          <div class="web-body"><img src="images/play-web1-body.png" alt="网页设计练习 01"></div>
           <span class="web-scroll-hint">悬停自动滚动浏览 ↓</span>
         </div>
         <div class="web-meta">
@@ -295,7 +298,8 @@ footer{background:var(--dark);}
       </div>
       <div class="web-card r">
         <div class="ph-img">
-          <img src="images/play-web2.png" alt="网页设计练习 02">
+          <div class="web-nav"><img src="images/play-web2-nav.png" alt=""></div>
+          <div class="web-body"><img src="images/play-web2-body.png" alt="网页设计练习 02"></div>
           <span class="web-scroll-hint">悬停自动滚动浏览 ↓</span>
         </div>
         <div class="web-meta">
@@ -442,9 +446,23 @@ window.addEventListener('scroll',()=>{if(window.innerWidth<=900){navEl.classList
   const vp=document.getElementById('trackViewport');
   const track=document.getElementById('trackScroll');
   if(!vp||!track)return;
-  // 移动端用原生滚动，跳过 JS 拖拽
+  // 移动端用原生滚动 + 箭头逐张对齐（收口不越界）
   if(window.matchMedia('(max-width:900px)').matches){
-    window.trackMove=function(dir){vp.scrollBy({left:dir*300,behavior:'smooth'});};
+    window.trackMove=function(dir){
+      const items=[...track.children];
+      if(!items.length)return;
+      const pad=parseFloat(getComputedStyle(vp).paddingLeft)||0;
+      const vpL=vp.getBoundingClientRect().left;
+      // 找到当前最贴近左基准线的那张
+      let cur=0,best=Infinity;
+      items.forEach((it,i)=>{
+        const rel=it.getBoundingClientRect().left-vpL-pad;
+        if(Math.abs(rel)<best){best=Math.abs(rel);cur=i;}
+      });
+      const t=Math.max(0,Math.min(items.length-1,cur+dir)); // 到头即停
+      const rel=items[t].getBoundingClientRect().left-vpL-pad;
+      vp.scrollTo({left:vp.scrollLeft+rel,behavior:'smooth'});
+    };
     return;
   }
   let pos=0, maxScroll=0, isDown=false, startX=0, startPos=0, moved=false;
@@ -502,6 +520,42 @@ if(navBurger&&mobileMenu){
     }
   });
 }
+
+/* 网页练习：悬停自动滚 + 手动滚，一手动就接管 */
+document.querySelectorAll('.web-card').forEach(card=>{
+  const body=card.querySelector('.web-body');
+  if(!body)return;
+  let raf=null,manual=false;
+  const stop=()=>{if(raf){cancelAnimationFrame(raf);raf=null;}};
+  function autoScroll(){
+    stop();manual=false;
+    const max=body.scrollHeight-body.clientHeight;
+    if(max<=1)return;
+    const dur=Math.max(4000,max*1.4),from=body.scrollTop,t0=performance.now();
+    const step=now=>{
+      if(manual)return;
+      const t=Math.min(1,(now-t0)/dur);
+      body.scrollTop=from+(max-from)*t;
+      if(t<1)raf=requestAnimationFrame(step);
+    };
+    raf=requestAnimationFrame(step);
+  }
+  function backTop(){
+    stop();manual=false;
+    const from=body.scrollTop,t0=performance.now(),dur=600;
+    const step=now=>{
+      if(manual)return;
+      const t=Math.min(1,(now-t0)/dur),e=t*(2-t);
+      body.scrollTop=from*(1-e);
+      if(t<1)raf=requestAnimationFrame(step);
+    };
+    raf=requestAnimationFrame(step);
+  }
+  card.addEventListener('mouseenter',autoScroll);
+  card.addEventListener('mouseleave',backTop);
+  body.addEventListener('wheel',()=>{manual=true;stop();},{passive:true});
+  body.addEventListener('touchstart',()=>{manual=true;stop();},{passive:true});
+});
 </script>
 </body>
 </html>

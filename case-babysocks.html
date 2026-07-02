@@ -75,7 +75,7 @@ nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9
 
 /* ══ 大封面 ══ */
 .cover-full{max-width:var(--wide);margin:80px auto 0;padding:0 var(--pad);}
-.cover-img{width:100%;aspect-ratio:16/9;border-radius:28px;overflow:hidden;background:var(--paper);border:1px solid var(--line-soft);display:flex;align-items:center;justify-content:center;position:relative;}
+.cover-img{width:100%;aspect-ratio:16/9;border-radius:28px;overflow:hidden;background:var(--paper);display:flex;align-items:center;justify-content:center;position:relative;}
 .cover-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .cover-ph{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--ink3);font-size:14px;font-family:'Noto Sans SC',sans-serif;}
 .cover-ph .ic{font-size:44px;opacity:.16;}
@@ -142,7 +142,7 @@ nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9
 .showcase-h{font-family:'Noto Sans SC',sans-serif;font-size:clamp(17px,2vw,26px);font-weight:300;line-height:1.6;letter-spacing:-.01em;color:rgba(255,255,255,.6);max-width:700px;margin-top:20px;margin-bottom:64px;}
 .showcase-h .dim{color:rgba(255,255,255,.4);}
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.g-item{border-radius:18px;overflow:hidden;background:var(--dark3);border:1px solid rgba(255,255,255,.08);aspect-ratio:740/1600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:rgba(255,255,255,.3);font-size:12px;font-family:'Noto Sans SC',sans-serif;position:relative;cursor:pointer;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.g-item{border-radius:18px;overflow:hidden;background:var(--dark3);aspect-ratio:740/1600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:rgba(255,255,255,.3);font-size:12px;font-family:'Noto Sans SC',sans-serif;position:relative;cursor:pointer;transition:transform .5s cubic-bezier(.16,1,.3,1);}
 .g-item:hover{transform:translateY(-8px);}
 .g-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .g-item .ic{font-size:28px;opacity:.4;}
@@ -213,7 +213,9 @@ footer{background:var(--dark);}
   nav{padding:8px 8px 8px 14px;}
   nav.collapsed{width:min(calc(100% - 56px),var(--wide));}
   .info-grid{grid-template-columns:1fr 1fr;gap:28px;}
-  .prob-row{grid-template-columns:1fr;gap:12px;padding:36px 0;}
+  .prob-row{grid-template-columns:1fr;gap:10px;padding:36px 0;}
+  .prob-big{font-size:24px;}
+  .prob-no{font-size:13px;letter-spacing:.1em;}
   .states-grid{grid-template-columns:1fr 1fr;}
   .gallery{grid-template-columns:1fr 1fr;}
   .hero-meta{flex-direction:column;align-items:flex-start;}
@@ -286,7 +288,7 @@ footer{background:var(--dark);}
 <div class="statement">
   <p class="sec-num r">01 — Background</p>
   <h2 class="sec-h r">背景</h2>
-  <h3 class="stmt-big r">一双智能袜加一个基站，采集宝宝的<b>心率、血氧、皮肤温度</b>，让父母随时知道——孩子，现在很好。</h3>
+  <h3 class="stmt-big r">一只智能袜加一个基站，采集宝宝的<b>心率、血氧、皮肤温度</b>，让父母随时知道——孩子，现在很好。</h3>
 </div>
 
 <!-- 问题 -->
