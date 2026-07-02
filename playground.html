@@ -14,7 +14,7 @@
   --ai:#5B53C4;--ai-l:#EEEDFE;
   --max:1320px;--pad:40px;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-user-select:none;user-select:none;}
 /* 交互元素禁止选中/拖拽复制 */
 button,.nav-cta,.nl,.pill,.filter-tag,.tl-tag,.av,.work-view,.work-view span,.proj-view-hint,.proj-view-hint span,.sec-more,.photo-hd-r,.cm-card,.cm-action,.cf-back,.back-link,.mm-link,.nav-burger,.track-arrow,.web-scroll-hint,.ai-flip-hint,.flow-step,.next-inner,.hero-scroll-hint,.logo-icon,.nav-logo,.proj-link,.contact-badge,.cb-dot,.view-img{user-select:none;-webkit-user-select:none;-webkit-user-drag:none;}
 
@@ -78,15 +78,14 @@ nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9
 }
 .phone{
   width:100%;aspect-ratio:750/1600;
-  border-radius:24px;overflow:hidden;
-  background:var(--bg);
+  background:transparent;
   position:relative;
   transition:transform .55s cubic-bezier(.16,1,.3,1),box-shadow .55s;
   cursor:pointer;
 }
 .phone-stage:hover .phone{opacity:.5;}
 .phone-stage .phone:hover{opacity:1;transform:translateY(-12px);z-index:5;}
-.phone .ph-img{width:100%;height:100%;background:var(--bg);border:none;}
+.phone .ph-img{width:100%;height:100%;background:transparent;border:none;}
 .phone .ph-img img{object-fit:contain;}
 .phone .ph-img-label .ic{font-size:18px;}
 .phone .ph-img-label{font-size:10px;}
@@ -103,7 +102,8 @@ nav.collapsed{width:min(calc(100% - 360px),720px);background:rgba(255,255,255,.9
 .web-card:hover .ph-img{box-shadow:0 28px 64px rgba(0,0,0,.12);transform:translateY(-6px);}
 .web-nav{flex:0 0 auto;width:100%;position:relative;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.06);}
 .web-nav img{display:block;position:static;inset:auto;width:100%;height:auto;object-fit:fill;}
-.web-body{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;position:relative;scrollbar-width:thin;-webkit-overflow-scrolling:touch;}
+.web-body{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;position:relative;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.web-body::-webkit-scrollbar{display:none;}
 .web-body img{display:block;position:static;inset:auto;width:100%;height:auto;object-fit:fill;}
 .web-scroll-hint{position:absolute;bottom:14px;right:14px;z-index:3;font-size:11px;color:#fff;background:rgba(10,10,10,.5);padding:5px 12px;border-radius:100px;font-family:'Noto Sans SC',sans-serif;backdrop-filter:blur(8px);opacity:0;transition:opacity .3s;pointer-events:none;}
 .web-card:hover .web-scroll-hint{opacity:1;}
@@ -205,11 +205,13 @@ footer{background:var(--dark);}
   .phone.p4,.phone.p5{display:block;}
   .ai-grid{grid-template-columns:1fr 1fr;}
   .track-item{width:78vw;max-width:420px;}
-  .track-viewport{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scroll-padding-left:var(--pad);cursor:default;}
+  .track-viewport{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scroll-padding-left:var(--pad);scroll-padding-right:var(--pad);cursor:default;padding:32px 0 8px;}
   .track-viewport::-webkit-scrollbar{display:none;}
   .track-viewport{scrollbar-width:none;}
-  .track-scroll{transform:none !important;transition:none;}
+  .track-scroll{transform:none !important;transition:none;padding-left:var(--pad);}
+  .track-scroll::after{content:"";flex:0 0 var(--pad);}
   .track-item{scroll-snap-align:start;}
+  .track-item:last-child{scroll-snap-align:end;}
   .foot-cta-bottom{grid-template-columns:1fr;gap:24px;}
   .foot-cta-bottom>div:nth-child(2),.foot-cta-bottom>div:nth-child(3){justify-self:start;text-align:left;}
 }
@@ -451,7 +453,7 @@ window.addEventListener('scroll',()=>{if(window.innerWidth<=900){navEl.classList
     window.trackMove=function(dir){
       const items=[...track.children];
       if(!items.length)return;
-      const pad=parseFloat(getComputedStyle(vp).paddingLeft)||0;
+      const pad=parseFloat(getComputedStyle(track).paddingLeft)||0;
       const vpL=vp.getBoundingClientRect().left;
       // 找到当前最贴近左基准线的那张
       let cur=0,best=Infinity;
@@ -460,8 +462,12 @@ window.addEventListener('scroll',()=>{if(window.innerWidth<=900){navEl.classList
         if(Math.abs(rel)<best){best=Math.abs(rel);cur=i;}
       });
       const t=Math.max(0,Math.min(items.length-1,cur+dir)); // 到头即停
-      const rel=items[t].getBoundingClientRect().left-vpL-pad;
-      vp.scrollTo({left:vp.scrollLeft+rel,behavior:'smooth'});
+      if(t===items.length-1){
+        vp.scrollTo({left:vp.scrollWidth,behavior:'smooth'}); // 最后一张：滚到底，右边缘对齐内容边距
+      }else{
+        const rel=items[t].getBoundingClientRect().left-vpL-pad;
+        vp.scrollTo({left:vp.scrollLeft+rel,behavior:'smooth'});
+      }
     };
     return;
   }

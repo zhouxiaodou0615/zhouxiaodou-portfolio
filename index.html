@@ -13,7 +13,7 @@
   --dark:#0A0A0A;--dark3:#222222;
   --max:1320px;--pad:40px;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-user-select:none;user-select:none;}
 /* 交互元素禁止选中/拖拽复制 */
 button,.nav-cta,.nl,.pill,.filter-tag,.tl-tag,.av,.work-view,.work-view span,.proj-view-hint,.proj-view-hint span,.sec-more,.photo-hd-r,.cm-card,.cm-action,.cf-back,.back-link,.mm-link,.nav-burger,.track-arrow,.web-scroll-hint,.ai-flip-hint,.flow-step,.next-inner,.hero-scroll-hint,.logo-icon,.nav-logo,.proj-link,.contact-badge,.cb-dot,.view-img{user-select:none;-webkit-user-select:none;-webkit-user-drag:none;}
 
@@ -79,12 +79,13 @@ nav.collapsed{
 .headline{font-family:'Noto Sans SC',sans-serif;font-weight:500;font-size:clamp(40px,6.5vw,96px);line-height:1.14;letter-spacing:-.04em;color:var(--ink);}
 
 /* ── 新 Hero：个人介绍 ── */
-.hero-intro{padding-bottom:150px;max-width:640px;}
+.hero-body{display:flex;justify-content:space-between;align-items:flex-start;gap:64px;padding-bottom:150px;}
+.hero-intro{max-width:640px;flex:1 1 auto;}
 .hero-name{font-family:'Noto Sans SC',sans-serif;font-weight:600;font-size:clamp(48px,7vw,104px);line-height:1.06;letter-spacing:-.03em;color:var(--ink);}
 .hero-role-title{font-family:'Noto Sans SC',sans-serif;font-weight:400;font-size:clamp(18px,2.2vw,28px);color:var(--ink2);letter-spacing:.02em;margin-top:14px;}
 .hero-bio{font-family:'Noto Sans SC',sans-serif;font-size:clamp(15px,1.5vw,19px);font-weight:300;color:var(--ink2);line-height:1.85;max-width:560px;margin-top:32px;opacity:0;animation:fadeIn 1s ease forwards .55s;}
 .hero-bio b{font-weight:500;color:var(--ink);}
-.hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px;}
+.hero-tags{display:flex;flex-direction:column;align-items:flex-end;gap:14px;flex-shrink:0;margin-top:10px;}
 .htag{font-size:13px;color:var(--ink2);border:1px solid var(--line-soft);padding:8px 18px;border-radius:100px;font-family:'Noto Sans SC',sans-serif;background:var(--bg);cursor:default;
   opacity:0;transform:translateY(10px);
   animation:tagIn .8s cubic-bezier(.16,1,.3,1) forwards;
@@ -257,10 +258,9 @@ nav.collapsed{
 .photo-hd-r:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
 
 /* 3张 — 左1大 右2上下 */
-.pgrid{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;align-items:stretch;}
+.pgrid{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:560px;}
 .pcell{border-radius:16px;overflow:hidden;background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:12px;gap:5px;font-family:'Noto Sans SC',sans-serif;transition:opacity .3s,transform .35s cubic-bezier(.34,1.56,.64,1);position:relative;}
-.pcell.tall{aspect-ratio:3/4;}
-.pcol{display:grid;grid-template-rows:1fr 1fr;gap:12px;}
+.pcell.tall{grid-row:1/3;}
 .pcell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
 .pcell:hover{transform:scale(1.02);}
 .pcell:hover img{transform:scale(1.08);}
@@ -312,6 +312,8 @@ footer{background:var(--dark);}
 
 @media(max-width:900px){
   :root{--pad:24px;}
+  .hero-body{flex-direction:column;gap:0;padding-bottom:110px;}
+  .hero-tags{flex-direction:row;flex-wrap:wrap;align-items:flex-start;gap:10px;margin-top:36px;}
   .nav-links{display:none;}
   .nav-right{display:none;}
   .nav-burger{display:flex;}
@@ -327,10 +329,9 @@ footer{background:var(--dark);}
   .work-blk.b1,.work-blk.b2{grid-column:1;}
   .skills-grid{grid-template-columns:1fr;gap:48px;}
   .about-grid{grid-template-columns:1fr;gap:40px;}
-  .pgrid{grid-template-columns:1fr;gap:12px;}
-  .pcol{display:contents;}
+  .pgrid{grid-template-columns:1fr;grid-template-rows:none;height:auto;gap:12px;}
   .pcell{height:260px;}
-  .pcell.tall{aspect-ratio:3/4;height:auto;}
+  .pcell.tall{grid-row:auto;height:320px;}
   .foot-cta-bottom{grid-template-columns:1fr;gap:24px;}
   .foot-cta-bottom>div{justify-self:start;text-align:left;}
   .foot-contact-col:nth-child(2),.foot-contact-col:nth-child(3){justify-self:start;text-align:left;}
@@ -371,10 +372,12 @@ footer{background:var(--dark);}
   <div class="hero-badge-row">
     <span class="av"><span class="av-dot"></span>OPEN TO WORK</span>
   </div>
-  <div class="hero-intro">
-    <h1 class="hero-name reveal-line l1"><span>周晓豆</span></h1>
-    <p class="hero-role-title reveal-line l2"><span>UI / UX 产品设计师</span></p>
-    <p class="hero-bio">专注 <b>AI、健康医疗与智能硬件</b>产品设计，希望通过设计帮助用户理解复杂信息，打造自然、可信、有温度的产品体验。</p>
+  <div class="hero-body">
+    <div class="hero-intro">
+      <h1 class="hero-name reveal-line l1"><span>周晓豆</span></h1>
+      <p class="hero-role-title reveal-line l2"><span>UI / UX 产品设计师</span></p>
+      <p class="hero-bio">专注 <b>AI、健康医疗与智能硬件</b>产品设计，希望通过设计帮助用户理解复杂信息，打造自然、可信、有温度的产品体验。</p>
+    </div>
     <div class="hero-tags">
       <span class="htag" style="--d:.05s">AI</span>
       <span class="htag" style="--d:.13s">健康医疗</span>
@@ -544,10 +547,8 @@ footer{background:var(--dark);}
     </div>
     <div class="pgrid r">
       <div class="pcell tall"><img src="images/play-photo-1.jpg" alt="摄影"></div>
-      <div class="pcol">
-        <div class="pcell"><img src="images/home-photo-1.jpg" alt="摄影"></div>
-        <div class="pcell"><img src="images/play-photo-2.jpg" alt="摄影"></div>
-      </div>
+      <div class="pcell"><img src="images/home-photo-1.jpg" alt="摄影"></div>
+      <div class="pcell"><img src="images/play-photo-2.jpg" alt="摄影"></div>
     </div>
     <p class="photo-sub">用镜头观察世界，设计之外的另一种表达。</p>
   </div>
