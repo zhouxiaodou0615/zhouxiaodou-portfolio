@@ -85,25 +85,18 @@ nav.collapsed{
 .hero-role-title{font-family:'Noto Sans SC',sans-serif;font-weight:400;font-size:clamp(18px,2.2vw,28px);color:var(--ink2);letter-spacing:.02em;margin-top:14px;}
 .hero-bio{font-family:'Noto Sans SC',sans-serif;font-size:clamp(15px,1.5vw,19px);font-weight:300;color:var(--ink2);line-height:1.85;max-width:560px;margin-top:32px;opacity:0;animation:fadeIn 1s ease forwards .55s;}
 .hero-bio b{font-weight:500;color:var(--ink);}
-.hero-tags{display:flex;flex-direction:column;align-items:flex-end;gap:20px;flex-shrink:0;margin-top:6px;}
-/* 外层：JS 鼠标排斥 */
-.htag-wrap{display:block;will-change:transform;transition:transform .5s cubic-bezier(.22,1,.36,1);}
-.htag-wrap:nth-child(1){margin-right:6px;}
-.htag-wrap:nth-child(2){margin-right:66px;}
-.htag-wrap:nth-child(3){margin-right:24px;}
-.htag-wrap:nth-child(4){margin-right:92px;}
-.htag-wrap:nth-child(5){margin-right:42px;}
-.htag-wrap:nth-child(6){margin-right:14px;}
-/* 中层：多轴 + 轻旋转 持续漂浮（相邻反向，节奏各异，不同步）*/
+.hero-tags{position:relative;width:360px;height:245px;flex-shrink:0;align-self:flex-start;margin-top:6px;}
+/* 外层：绝对定位散布 + JS 鼠标排斥 */
+.htag-wrap{position:absolute;will-change:transform;transition:transform .5s cubic-bezier(.22,1,.36,1);}
+/* 中层：多轴 + 轻旋转 持续漂浮（相邻反向，节奏各异）*/
 .htag-float{display:block;will-change:transform;animation:floatXY var(--fd,7s) ease-in-out infinite calc(1.3s + var(--d));}
 .htag-wrap:nth-child(even) .htag-float{animation-direction:reverse;}
-/* 内层：松弛入场（浮上来 + 轻回弹）*/
-.htag{display:inline-block;font-size:13px;color:var(--ink2);border:1px solid var(--line-soft);padding:8px 18px;border-radius:100px;font-family:'Noto Sans SC',sans-serif;background:var(--bg);cursor:default;white-space:nowrap;
+/* 内层：黑底白字 + 松弛入场 */
+.htag{display:inline-block;font-size:13px;color:#fff;border:none;padding:9px 18px;border-radius:100px;font-family:'Noto Sans SC',sans-serif;background:#0f0f0f;cursor:default;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.10);
   opacity:0;transform:translateY(16px) scale(.92);
   animation:tagRise .9s cubic-bezier(.34,1.56,.64,1) forwards calc(.4s + var(--d));
-  transition:border-color .4s ease,color .4s ease;}
-.hero-tags:hover .htag{color:var(--ink3);}
-.htag:hover{border-color:var(--ink);color:var(--ink) !important;}
+  transition:background .35s ease;}
+.htag:hover{background:#333;}
 @keyframes tagRise{to{opacity:1;transform:translateY(0) scale(1);}}
 @keyframes floatXY{
   0%,100%{transform:translate(0,0) rotate(0deg);}
@@ -332,8 +325,8 @@ footer{background:var(--dark);}
 @media(max-width:900px){
   :root{--pad:24px;}
   .hero-body{flex-direction:column;gap:0;padding-bottom:110px;}
-  .hero-tags{flex-direction:row;flex-wrap:wrap;align-items:flex-start;gap:10px;margin-top:36px;}
-  .htag-wrap{margin-right:0 !important;transform:none !important;}
+  .hero-tags{position:static;width:auto;height:auto;display:flex;flex-direction:row;flex-wrap:wrap;align-items:flex-start;gap:10px;margin-top:36px;}
+  .htag-wrap{position:static;left:auto !important;top:auto !important;transform:none !important;}
   .htag-float{animation:none !important;}
   .nav-links{display:none;}
   .nav-right{display:none;}
@@ -400,12 +393,12 @@ footer{background:var(--dark);}
       <p class="hero-bio">专注 <b>AI、健康医疗与智能硬件</b>产品设计，希望通过设计帮助用户理解复杂信息，打造自然、可信、有温度的产品体验。</p>
     </div>
     <div class="hero-tags">
-      <span class="htag-wrap" style="--d:.05s;--fd:6.5s"><span class="htag-float"><span class="htag">AI</span></span></span>
-      <span class="htag-wrap" style="--d:.13s;--fd:8.2s"><span class="htag-float"><span class="htag">健康医疗</span></span></span>
-      <span class="htag-wrap" style="--d:.09s;--fd:7s"><span class="htag-float"><span class="htag">智能硬件</span></span></span>
-      <span class="htag-wrap" style="--d:.19s;--fd:9s"><span class="htag-float"><span class="htag">产品体验</span></span></span>
-      <span class="htag-wrap" style="--d:.24s;--fd:6s"><span class="htag-float"><span class="htag">摄影</span></span></span>
-      <span class="htag-wrap" style="--d:.16s;--fd:7.6s"><span class="htag-float"><span class="htag">用户体验</span></span></span>
+      <span class="htag-wrap" style="--d:.05s;--fd:6.5s;left:244px;top:4px"><span class="htag-float"><span class="htag">AI</span></span></span>
+      <span class="htag-wrap" style="--d:.13s;--fd:8.2s;left:26px;top:40px"><span class="htag-float"><span class="htag">健康医疗</span></span></span>
+      <span class="htag-wrap" style="--d:.09s;--fd:7s;left:206px;top:82px"><span class="htag-float"><span class="htag">智能硬件</span></span></span>
+      <span class="htag-wrap" style="--d:.19s;--fd:9s;left:92px;top:126px"><span class="htag-float"><span class="htag">产品体验</span></span></span>
+      <span class="htag-wrap" style="--d:.24s;--fd:6s;left:262px;top:160px"><span class="htag-float"><span class="htag">摄影</span></span></span>
+      <span class="htag-wrap" style="--d:.16s;--fd:7.6s;left:14px;top:200px"><span class="htag-float"><span class="htag">用户体验</span></span></span>
     </div>
   </div>
 </section>
